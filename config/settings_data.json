@@ -1,8 +1,5 @@
 {
   "current": {
-    "checkout_logo_image": "shopify:\/\/shop_images\/newborn_logo.png",
-    "checkout_accent_color": "#000000",
-    "checkout_button_color": "#ccf951",
     "pluginseo_pageTitleEnableAppender": true,
     "pluginseo_pageTitleTemplateApplyToAll": true,
     "pluginseo_pageTitleTruncateEnableForCollections": true,
@@ -37,6 +34,9 @@
     "language_switcher_enabled": true,
     "language_switcher_position": "bottom-right",
     "show_wishlist": true,
+    "checkout_logo_image": "shopify:\/\/shop_images\/newborn_logo.png",
+    "checkout_accent_color": "#000000",
+    "checkout_button_color": "#ccf951",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -133,6 +133,14 @@
     },
     "content_for_index": [
 
-    ]
+    ],
+    "blocks": {
+      "855628211100114053": {
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {
+        }
+      }
+    }
   }
 }
