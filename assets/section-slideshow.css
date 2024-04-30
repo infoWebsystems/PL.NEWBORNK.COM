@@ -1,0 +1,91 @@
+
+.slideshow-herro-section .slideshow-card-spacing {
+  padding-top: 0rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+.slideshow-herro-section .media>img {
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: center center;
+    object-position: center center;
+    -webkit-transition: opacity .4s cubic-bezier(.25, .46, .45, .94);
+    -o-transition: opacity .4s cubic-bezier(.25, .46, .45, .94);
+    transition: opacity .4s cubic-bezier(.25, .46, .45, .94);
+  height: auto;
+}
+.slideshow-herro-section .swiper-wrapper {
+  list-style: none;
+  margin: 0;
+}
+.slideshow-herro-section .swiper-container {
+  width: 100%;
+  max-height: 100%;
+}
+
+.slideshow-herro-section .swiper-slide img {
+  width: 100%;
+}
+
+.slideshow-herro-section .swiper-pagination {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 0;
+}
+
+.slideshow-herro-section .swiper-pagination .box {
+  border-radius: 0;
+  background: transparent;
+  font-size: 12px;
+  width: 25%;
+  max-width: 10rem;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.slideshow-herro-section .swiper-container-horizontal>.swiper-pagination-bullets,
+.slideshow-herro-section .swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: 10px;
+  left: 0;    
+  right: 0;
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+@media (max-width: 749px) {
+  .slideshow-herro-section .swiper-container-horizontal>.swiper-pagination-bullets,
+  .slideshow-herro-section .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 0px;
+    width: 90%;
+  }
+
+}
+.slideshow-herro-section .swiper-pagination-bullet {
+  margin: 10px !important;
+  border-bottom: 3px solid;
+  border-bottom-color: var(--color-base-solid-button-labels);
+    opacity: 0.6;
+    }  
+
+.slideshow-herro-section .swiper-pagination-bullet-active {
+  border-bottom-color: var(--color-base-solid-button-labels);
+    opacity: 1;
+    }

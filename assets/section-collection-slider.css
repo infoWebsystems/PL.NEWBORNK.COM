@@ -1,0 +1,21 @@
+.collection-slider .collection.page-width {
+  padding-right: 0;  
+}
+.collection-slider .price dd {
+  margin: 0 0;
+}
+.collection-slider .price {
+  font-size: 1.3rem;
+}
+.swiper-container-collection {
+  overflow: visible;
+}
+.collection-slider .title .icon-caret {
+  width: 18px;
+  height: 11px;
+  -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+          transform: rotate(270deg);
+/*   margin-left: -3px; */
+  margin-bottom: 3px;
+}

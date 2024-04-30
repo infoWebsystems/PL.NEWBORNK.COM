@@ -1,0 +1,19 @@
+{% layout none %}
+{%- assign handles = search.terms | escape | split: ',' -%}
+{
+  "products": [
+  {% for handle in handles %}
+    {%- assign pr = all_products[handle] -%}
+    {% if pr == empty %}
+      {% continue %}
+    {% endif %}
+    { "item": {{ pr | json }}, "trm": { "description": {{ pr.description | strip_html | json }} } }
+
+    {%- if forloop.last -%}
+
+    {% else %}
+      , 
+    {% endif %}
+  {% endfor %}
+  ]
+}

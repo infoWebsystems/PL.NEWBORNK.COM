@@ -1,0 +1,243 @@
+{
+  "sections": {
+    "1630994380770cb550": {
+      "type": "slideshow",
+      "blocks": {
+        "1630994380b1b22eeb-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_2024-02-13_12-59-27.png",
+            "image_phone": "shopify:\/\/shop_images\/Mask_group.jpg",
+            "banner_link": "shopify:\/\/collections\/sale",
+            "language": "UK"
+          }
+        },
+        "22a50905-f3ab-4163-8763-bbc28328aa48": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_566906.jpg",
+            "image_phone": "shopify:\/\/shop_images\/Frame_566907.jpg",
+            "banner_link": "shopify:\/\/collections\/carhartt-wip",
+            "language": "UK"
+          }
+        },
+        "1630994380b1b22eeb-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_566877_094da0e8-40b1-49d3-9eea-69054d802506.jpg",
+            "image_phone": "shopify:\/\/shop_images\/Frame_566878_caf6d4bf-6acc-4563-bc17-5ab6941e2bb1.jpg",
+            "banner_link": "shopify:\/\/collections\/new-arrivals",
+            "language": "UK"
+          }
+        },
+        "ce6d2dc3-91a2-4167-94e4-935de9a1b462": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_566884.jpg",
+            "image_phone": "shopify:\/\/shop_images\/Ban_jan22_sale_mob_41de1e5e-c6a9-45fb-acec-48691a46ff42.jpg",
+            "banner_link": "shopify:\/\/collections\/pleasures",
+            "language": "UK"
+          }
+        },
+        "1630994380b1b22eeb-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_566879.jpg",
+            "image_phone": "shopify:\/\/shop_images\/Ban_jan22_sale_mob_77239370-eb3a-4d53-883c-abb9a10d8779.jpg",
+            "banner_link": "shopify:\/\/collections\/gramicci",
+            "language": "UK"
+          }
+        },
+        "7b7d3efa-43a7-4e95-a5e3-f5208d21b021": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_202_1f133780-7d8d-4690-a084-5621ac5e8b84.jpg",
+            "image_phone": "shopify:\/\/shop_images\/Frame_376_e7cf6ee2-bb0c-4223-9736-ffa988ae0c46.jpg",
+            "banner_link": "shopify:\/\/collections\/gift_ideas",
+            "language": "UK"
+          }
+        }
+      },
+      "block_order": [
+        "1630994380b1b22eeb-0",
+        "22a50905-f3ab-4163-8763-bbc28328aa48",
+        "1630994380b1b22eeb-2",
+        "ce6d2dc3-91a2-4167-94e4-935de9a1b462",
+        "1630994380b1b22eeb-1",
+        "7b7d3efa-43a7-4e95-a5e3-f5208d21b021"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "swipe_on_mobile": false
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/banner.png",
+        "desktop_text_box_position": "flex-end",
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": true,
+        "adapt_height_first_image": false
+      }
+    },
+    "1626369903c393cced": {
+      "type": "featured-collection-slider",
+      "disabled": true,
+      "settings": {
+        "title": "НОВІ НАДХОДЖЕННЯ",
+        "show_text": false,
+        "collection": "new-arrivals",
+        "products_to_show": 6.5,
+        "products_to_show_mobile": 1.6,
+        "show_view_all": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "show_arrow": true,
+        "brand_collection": false
+      }
+    },
+    "1626416534da40dc37": {
+      "type": "collection-list",
+      "blocks": {
+        "1626416534da40dc37-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "helas"
+          }
+        },
+        "1626416534da40dc37-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "thanks-london"
+          }
+        },
+        "1626416534da40dc37-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gramicci"
+          }
+        }
+      },
+      "block_order": [
+        "1626416534da40dc37-0",
+        "1626416534da40dc37-1",
+        "1626416534da40dc37-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "image_ratio": "adapt",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "button_overlay": true,
+        "swipe_on_mobile": false,
+        "image_padding": false,
+        "show_view_all": false
+      }
+    },
+    "featured_collection_slider_3jzXAK": {
+      "type": "featured-collection-slider",
+      "disabled": true,
+      "settings": {
+        "title": "РОЗПРОДАЖ",
+        "show_text": true,
+        "collection": "sale",
+        "products_to_show": 6.5,
+        "products_to_show_mobile": 1.5,
+        "show_view_all": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "show_arrow": true,
+        "brand_collection": false
+      }
+    },
+    "1626450162f5dda00b": {
+      "type": "collection-list",
+      "blocks": {
+        "1626450162f5dda00b-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "filling-pieces"
+          }
+        },
+        "1626450162f5dda00b-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sania-jeweler"
+          }
+        }
+      },
+      "block_order": [
+        "1626450162f5dda00b-1",
+        "1626450162f5dda00b-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "image_ratio": "square",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "button_overlay": false,
+        "swipe_on_mobile": false,
+        "image_padding": false,
+        "show_view_all": false
+      }
+    },
+    "16264502060c7e1d80": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "LIFESTYLE",
+        "collection": "lifestyle",
+        "full_width": true,
+        "products_to_show": 4,
+        "show_view_all": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "show_arrow": true
+      }
+    },
+    "custom_liquid_tBx87F": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div class=\"elfsight-sapp-e54509ea-f41c-48fe-8710-8a1a409dc648\"><\/div>"
+      }
+    },
+    "stub_PKkLpD": {
+      "type": "stub",
+      "settings": {
+        "btn-text": "Button text",
+        "logo_link": "",
+        "instagram_link": "",
+        "facebook_link": "",
+        "telegram_link": ""
+      }
+    }
+  },
+  "order": [
+    "1630994380770cb550",
+    "image_banner",
+    "1626369903c393cced",
+    "1626416534da40dc37",
+    "featured_collection_slider_3jzXAK",
+    "1626450162f5dda00b",
+    "16264502060c7e1d80",
+    "custom_liquid_tBx87F",
+    "stub_PKkLpD"
+  ]
+}

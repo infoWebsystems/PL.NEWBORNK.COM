@@ -1,0 +1,159 @@
+{
+  "wrapper": "section#about-page.is--about",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "1644333406ba1c490d": {
+      "type": "image-banner-v2",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Group_149.png"
+      }
+    },
+    "16443297349827cfa2": {
+      "type": "rich-text-v2",
+      "blocks": {
+        "9e8d71c0-844b-4b11-b677-38b3bf2bfc88": {
+          "type": "text",
+          "settings": {
+            "text": "<p>онлайн концепт-стор з унікальною селекцією товарів,<\/p>",
+            "max_width": 790
+          }
+        }
+      },
+      "block_order": [
+        "9e8d71c0-844b-4b11-b677-38b3bf2bfc88"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "164434510806ba7910": {
+      "type": "slider",
+      "settings": {
+        "collection": "зимно",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_vendor": false,
+        "show_arrow": false,
+        "brand_collection": false,
+        "show_info": false
+      }
+    },
+    "16443296830aabadcd": {
+      "type": "rich-text-v2",
+      "blocks": {
+        "719dbf53-c816-494d-aabd-07891099c901": {
+          "type": "text",
+          "settings": {
+            "text": "<p>що поєднує в собі магазин одягу та lifestyle-продукції від локальних та іноземних брендів.<br\/><\/p>",
+            "max_width": 790
+          }
+        }
+      },
+      "block_order": [
+        "719dbf53-c816-494d-aabd-07891099c901"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "margin_top": 0,
+        "margin_bottom": 200
+      }
+    },
+    "16443297726d9930ec": {
+      "type": "rich-text-v2",
+      "blocks": {
+        "8d2b877a-dac7-4e1c-82c9-8d76fb78c0d5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Магазин засновано у 2021 році двома друзями:<\/p>",
+            "max_width": 520
+          }
+        }
+      },
+      "block_order": [
+        "8d2b877a-dac7-4e1c-82c9-8d76fb78c0d5"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "margin_top": 200,
+        "margin_bottom": 0
+      }
+    },
+    "1644331226522565af": {
+      "type": "multicolumn-v2",
+      "blocks": {
+        "1644331226ce183a24-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/photo_2022-02-14_21-17-26.jpg",
+            "title": "ДМИТРО РУДАКОВ",
+            "text": "<p>Технічний експерт. Брав участь у створенні та запуску фінтех, GIS та Influencer Marketplace проєктів. Має 6-річний досвід роботи з українськими та міжнародними TOP IT компаніями.<\/p>"
+          }
+        },
+        "1644331226ce183a24-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/254827446_288865236453523_8434811695550782982_n.jpg",
+            "title": "АНТОН БУСЬКО",
+            "text": "<p>за плечима якого є багаторічний досвід у міжнародних рекламних агенціях і топових фешн-ретейлерах Києва. Засновник першого українського streetwear-бренду DITCH і телеграм-каналу Tony Talks.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1644331226ce183a24-0",
+        "1644331226ce183a24-1"
+      ],
+      "settings": {
+        "title": "",
+        "image_width": "half",
+        "image_ratio": "portrait",
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "swipe_on_mobile": false
+      }
+    },
+    "1644328026eafaf09c": {
+      "type": "rich-text-v2",
+      "blocks": {
+        "98696d99-675e-44e3-aec8-27aedcf9b3b9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>NEWBORN K - місце, що об'єднує ком'юніті креативного класу Києва.<\/p>",
+            "max_width": 520
+          }
+        }
+      },
+      "block_order": [
+        "98696d99-675e-44e3-aec8-27aedcf9b3b9"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "margin_top": 150,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1644333406ba1c490d",
+    "16443297349827cfa2",
+    "164434510806ba7910",
+    "16443296830aabadcd",
+    "16443297726d9930ec",
+    "1644331226522565af",
+    "1644328026eafaf09c"
+  ]
+}

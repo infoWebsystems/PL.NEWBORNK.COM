@@ -1,0 +1,278 @@
+{% if settings.language_switcher_enabled %}
+
+{%- assign request_locale = request.locale %}
+
+{%- assign shop_published_locales = shop.published_locales %}
+{%- assign use_international_domains = false %}
+
+{%- if shop.metafields.translation_lab.published_locales %}
+{%- assign shop_published_locales = shop.metafields.translation_lab.published_locales %}
+{%- assign use_international_domains = true %}
+{%- endif %}
+
+{{ 'translation-lab-language-switcher-floating.css' | asset_url | stylesheet_tag }}
+
+<div class="translation-lab-language-switcher {{ settings.language_switcher_position }}">
+    <div class="translation-lab-dropdown">
+        {% if settings.language_switcher_flags %}
+        <img class="language-flag" src="{{ 'tlab-flags-' | append: request_locale.iso_code | append: '.png' | asset_url }}">
+        {% endif %}
+        {% case settings.language_switcher_label %}
+        {% when 'language-name' %}
+        <span class="language-label language-name">{{ request_locale.endonym_name | split: '(' | first | strip }}</span>
+        {% when 'language-code' %}
+        <span class="language-label language-code">{{ request_locale.iso_code | split: '-' | first | strip }}</span>
+        {% endcase %}
+    </div>
+    <ul class="translation-lab-language-options {{ settings.language_switcher_position }}">
+        {%- for locale in shop_published_locales -%}
+        <li class="language-option {% if routes.root_url == locale.root_url %}active{% endif %}" data-language-code="{{ locale.iso_code }}">
+            {% if settings.language_switcher_flags %}
+            <img class="language-flag" src="{{ 'tlab-flags-' | append: locale.iso_code | append: '.png' | asset_url }}">
+            {% endif %}
+            {% case settings.language_switcher_label %}
+            {% when 'language-name' %}
+            <span class="language-label language-name">{{ locale.endonym_name | split: '(' | first | strip }}</span>
+            {% when 'language-code' %}
+            <span class="language-label language-code">{{ locale.iso_code | split: '-' | first | strip }}</span>
+            {% endcase %}
+        </li>
+        {%- endfor %}
+    </ul>
+</div>
+
+<script>
+    if (!Array.prototype.find) {
+        Object.defineProperty(Array.prototype, 'find', {
+            value: function (predicate) {
+                if (this == null) {
+                    throw TypeError('"this" is null or not defined');
+                }
+
+                var o = Object(this);
+
+                var len = o.length >>> 0;
+
+                if (typeof predicate !== 'function') {
+                    throw TypeError('predicate must be a function');
+                }
+
+                var thisArg = arguments[1];
+
+                var k = 0;
+
+                while (k < len) {
+                    var kValue = o[k];
+                    if (predicate.call(thisArg, kValue, k, o)) {
+                        return kValue;
+                    }
+                    k++;
+                }
+
+                return undefined;
+            },
+            configurable: true,
+            writable: true
+        });
+    }
+</script>
+
+{% if request.design_mode %}
+
+{% endif %}
+
+<style>
+
+  .translation-lab-language-switcher {
+    background-color: {{ settings.language_switcher_background_color }} !important;
+    border-color: {{ settings.language_switcher_border_color }} !important;
+    border-width: {{ settings.language_switcher_border_width }}px !important;
+    font-size: {{ settings.language_switcher_font_size }} !important;
+    font-weight: {{ settings.language_switcher_font_weight }} !important;
+  }
+
+  .translation-lab-dropdown {
+    color: {{ settings.language_switcher_text_color }} !important;
+  }
+
+  .translation-lab-dropdown:after {
+    border-color: {{ settings.language_switcher_text_color }} !important;
+  }
+
+  .translation-lab-language-switcher.top-right {
+    position: absolute;
+    top: {{ settings.language_switcher_spacing_top }}px;
+    bottom: auto;
+    left: auto;
+    right: {{ settings.language_switcher_spacing_right }}px;
+  }
+
+  .translation-lab-language-switcher.top-left {
+    position: absolute;
+    top: {{ settings.language_switcher_spacing_top }}px;
+    bottom: auto;
+    left: {{ settings.language_switcher_spacing_left }}px;
+    right: auto;
+  }
+
+  .translation-lab-language-switcher.bottom-left {
+    position: fixed !important;
+    top: auto !important;
+    bottom: {{ settings.language_switcher_spacing_bottom }}px !important;
+    left: {{ settings.language_switcher_spacing_left }}px !important;
+    right: auto !important;
+  }
+
+  .translation-lab-language-switcher.bottom-right {
+    position: fixed !important;
+    top: auto !important;
+    bottom: {{ settings.language_switcher_spacing_bottom }}px !important;
+    left: auto !important;
+    right: {{ settings.language_switcher_spacing_right }}px !important;
+  }
+
+  {% if settings.language_switcher_custom_css != blank -%}
+  {{- settings.language_switcher_custom_css -}}
+  {%- endif %}
+
+</style>
+
+<script>
+
+  (function () {
+
+    var useInternationalDomains = {{ use_international_domains | json }};
+
+    function buildLanguageList() {
+      var languageListJson = '[{%- for locale in shop_published_locales %}{\
+"name": "{{locale.name | split: "(" | first | strip}}",\
+"endonym_name": "{{ locale.endonym_name | split: "(" | first | strip}}",\
+"iso_code": "{{ locale.iso_code }}",\
+"primary": {{ locale.primary }},\
+"flag": "{{ locale.iso_code | append: ".png" | asset_url }}",\
+"domain": {{ locale.domain | json }}\
+}{% unless forloop.last %},{% endunless -%}{%- endfor %}]';
+      return JSON.parse(languageListJson);
+    }
+
+    function createDropdown(container, languageChangeHandler) {
+
+      var dropdown = container.children[0];
+      var span = dropdown.children[0];
+      var selectedImg = dropdown.children[1];
+      var ul = container.children[1];
+
+      for (var i = 0; i < ul.children.length; i++) {
+        var el = ul.children[i];
+        el.onclick = languageChangeHandler(el.dataset.languageCode, el.children[0].innerText, languageChangeCallback);
+      }
+
+      var isOpen = false;
+
+      dropdown.addEventListener('click', function (event) {
+        event.preventDefault();
+        isOpen = !isOpen;
+        if (isOpen) {
+          openDropdown();
+        } else {
+          closeDropdown();
+        }
+      });
+
+      container.addEventListener('mouseleave', function () {
+        closeDropdown();
+      });
+
+      function languageChangeCallback(lang, elementText) {
+        closeDropdown();
+        span.textContent = elementText;
+        if (selectedImg) {
+          selectedImg.src = lang.flag;
+        }
+      }
+
+      function openDropdown() {
+        isOpen = true;
+        dropdown.classList.add('open');
+        ul.classList.add('open');
+      }
+
+      function closeDropdown() {
+        isOpen = false;
+        dropdown.classList.remove('open');
+        ul.classList.remove('open');
+      }
+    }
+
+    function redirectUrlBuilderFunction(primaryLocale) {
+      var shopDomain = 'https://{{shop.domain}}';
+      if (window.Shopify && window.Shopify.designMode) {
+        shopDomain = 'https://{{shop.permanent_domain}}';
+      }
+      var currentLocale = '{{request_locale.iso_code}}'.toLowerCase();
+      var currentLocaleRegEx = new RegExp('^\/' + currentLocale, "ig");
+      var primaryLocaleLower = primaryLocale.toLowerCase();
+      var pathname = window.location.pathname;
+      var queryString = window.location.search || '';
+      return function build(redirectLocale) {
+        if (!redirectLocale) {
+          return null;
+        }
+        var redirectLocaleLower = redirectLocale.toLowerCase();
+        if (currentLocale !== redirectLocaleLower) {
+          if (useInternationalDomains) {
+            var languageList = buildLanguageList();
+            var internationalDomain = languageList.find(function (x) { return x.iso_code.toLowerCase() === redirectLocaleLower; });
+            if (internationalDomain) {
+              return 'https://' + internationalDomain.domain + pathname + queryString;
+            }
+          }
+          else {
+            if (redirectLocaleLower === primaryLocaleLower) {
+              return shopDomain + pathname.replace(currentLocaleRegEx, '') + queryString;
+            } else if (primaryLocaleLower === currentLocale) {
+              return shopDomain + '/' + redirectLocaleLower + pathname + queryString;
+            } else {
+              return shopDomain + '/' + pathname.replace(currentLocaleRegEx, redirectLocaleLower) + queryString;
+            }
+          }
+        }
+        return null;
+      }
+    }
+
+    function configure() {
+
+      var languageList = buildLanguageList();
+      var primaryLanguage = languageList.find(function (x) { return x.primary; });
+      if (!primaryLanguage || !primaryLanguage.iso_code) {
+        return;
+      }
+
+      var redirectUrlBuilder = redirectUrlBuilderFunction(primaryLanguage.iso_code);
+
+      var containers = document.querySelectorAll('.translation-lab-language-switcher');
+      if (containers && containers.length) {
+        for (var i = 0; i < containers.length; i++) {
+          createDropdown(containers[i], languageChangeHandler);
+        }
+      }
+
+      function languageChangeHandler(languageCode, elementText, callback) {
+        var selectedLanguage = languageList.find(function (language) { return language.iso_code.toLowerCase() === languageCode.toLowerCase() });
+        return function () {
+          callback(selectedLanguage, elementText);
+          localStorage.setItem('translation-lab-lang', selectedLanguage.iso_code);
+          var redirectUrl = redirectUrlBuilder(selectedLanguage.iso_code);
+          redirectUrl && window.location.assign(redirectUrl);
+        }
+      }
+    }
+
+    configure();
+
+  })();
+
+</script>
+
+{% endif %}

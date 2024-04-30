@@ -1,0 +1,188 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-collection-grid.css' | asset_url | stylesheet_tag }}
+{{ 'component-collection-grid-trm.css' | asset_url | stylesheet_tag }}
+{{ 'section-brand.css' | asset_url | stylesheet_tag }}
+
+
+<div class="collection-filters page-width collection-brands-list" >
+  {%- if section.settings.enable_filtering -%}
+  
+    {%- assign total_active_values = 0 -%}
+  
+    <collection-filters-form class="facets">
+      
+        {% if section.settings.enable_filtering %}
+         
+          <div class="facets__wrapper">
+            {%- for filter in collection.filters -%}
+              {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+              {% case filter.type %}
+                {% when 'list' %}
+                  {% if filter.param_name contains 'vendor' %}
+                    <div class="facets__list list-unstyled" role="list">
+                      {% assign alfabeta =  '' %}
+                      {% assign alfabeta_num =  '' %}
+                      {% assign order_num = 0 %}
+                      {% assign brand_num = 0 %}
+                      {% assign brand_numer = 0 %}
+                          <div class="">
+                       {%- for value in filter.values -%}    
+                        {% assign alfabeta_next_num =  value.value | slice: 0 | upcase %}
+                        {% unless alfabeta_num == alfabeta_next_num %}
+                          {% assign brand_num = brand_num | plus: 1 %}   
+                          {% assign alfabeta_num = alfabeta_next_num %}   
+                        {% endunless %}
+                        {% assign alfabeta_next_num =  value.value | slice: 0 | upcase %}    
+                       {%- endfor -%}
+                            
+                       {% assign brand_num_col = brand_num | divided_by: 3 %}
+                       {% assign brand_num_start_col_2 = brand_num_col | plus: 1 %}   
+                       {% assign brand_num_col_2 = brand_num_col | times: 2 %}
+                       {% assign brand_num_start_col_3 = brand_num_col_2 | plus: 1 %}    
+                       {% assign brand_num_col_3 = brand_num_col | times: 3 %}   
+                       <!--p>{{brand_num_col}}</p-->
+                            
+                      {%- for value in filter.values -%}
+                        {% assign alfabeta_next =  value.value | slice: 0 | upcase %}
+                        {% assign vendor_handle = value.value | handle %}
+                            
+                        {% if vendor_handle contains '-amp-' %}
+                          {% assign vendor_handle = vendor_handle | replace: "amp-" %}
+                        {%- endif -%}
+                            
+                        {% unless alfabeta == alfabeta_next %}
+                         {% assign brand_numer = brand_numer | plus: 1 %}
+                            
+                         {% if brand_numer == 1 %} 
+                           {% assign order_num = order_num | plus: 1 %}   
+                         {% endif%}
+                            
+                         {% if brand_numer <= brand_num_col and brand_numer != 1 %} 
+                           {% assign order_num = order_num | plus: 3 %}   
+                         {% endif%}
+                            
+                         {% if brand_numer == brand_num_start_col_2 %} 
+                           {% assign order_num = brand_numer | minus: brand_num_col | plus: 1 %}   
+                         {% endif%}
+                            
+                         {% if brand_numer <= brand_num_col_2 and brand_numer > brand_num_col and brand_numer != brand_num_start_col_2 %} 
+                           {% assign order_num = order_num | plus: 3 %}   
+                         {% endif%}
+                            
+                         {% if brand_numer == brand_num_start_col_3 %} 
+                           {% assign order_num = brand_numer | minus: brand_num_col_2 | plus: 2 %}   
+                         {% endif%}
+                            
+                         {% if brand_numer <= brand_num_col_3 and brand_numer > brand_num_col and brand_numer > brand_num_col_2 and brand_numer != brand_num_start_col_3 %} 
+                           {% assign order_num = order_num | plus: 3 %}   
+                         {% endif%}    
+                            
+                          </div>
+                          <div class="brand-block brand-{{brand_numer}}" style="order:{{order_num}}">
+                            <h2 class="brand-letter">{{ alfabeta_next }}</h2>
+                            <p class="brand-first-title">
+                              {%- if collections[vendor_handle]  -%}
+                                <a class="brand-title" href="{{ collections[vendor_handle].url }}">{{ collections[vendor_handle].title }}</a>
+                              {%- else -%}
+                                <a class="brand-title" href="{{vendor_handle}}">{{ vendor_handle }}</a>
+                              {%- endif -%}
+                            </p>
+                            </br>
+                            {% assign alfabeta = alfabeta_next %}
+                        {% else %}
+                            <p class="brand-next-title {{ vendor_handle }}">
+                              {%- if collections[vendor_handle]  -%}
+                                <a class="brand-title" href="{{ collections[vendor_handle].url }}">{{ collections[vendor_handle].title }}</a>
+                              {%- else -%}
+                                <a class="brand-title" href="{{vendor_handle}}">{{ vendor_handle }}</a>
+                              {%- endif -%}
+                            </p>
+                        {% endunless %}
+                        {% assign alfabeta_next =  value.value | slice: 0 | upcase %}
+                      {%- endfor -%}
+                    </div>
+                  {% endif %}
+              {% endcase %}
+            {%- endfor -%}
+          </div>
+        {% endif %}
+    </collection-filters-form>
+  {%- endif -%}
+</div>
+<!--ul>
+  {%- for product_vendor in shop.vendors -%}
+    <li>{{ product_vendor | link_to_vendor }}</li>
+  {%- endfor -%}
+</ul-->
+<script src="{{ 'collection-filters-form.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "spaced-section collection-grid-section section-with-sidebar",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    }
+  ]
+}
+{% endschema %}

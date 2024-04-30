@@ -1,0 +1,21 @@
+.blog-articles {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .blog-articles {
+    -ms-grid-columns: 1fr 1rem 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .blog-articles > *:first-child,
+  .blog-articles > *:nth-child(4),
+  .blog-articles > *:last-child:nth-child(2),
+  .blog-articles > *:last-child:nth-child(5) {
+    -ms-grid-column-span: 2;
+    grid-column: span 2;
+    text-align: center;
+  }
+}

@@ -1,0 +1,1853 @@
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"/>
+  </symbol>
+</svg>
+<style>
+  details[open]>.header__icon--menu .icon-hamburger {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1.0);
+    transform: rotate(90deg);
+  }
+
+  .footer__localization {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 1rem;
+  }
+  .footer__localization:empty {
+    display: none;
+  }
+  .localization-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: auto 1 0px;
+            flex: auto 1 0;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  .localization-form:only-child {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-flex: initial;
+        -ms-flex: initial;
+            flex: initial;
+    padding: 1rem 0;
+  }
+  .localization-form:only-child .button,
+  .localization-form:only-child .localization-form__select {
+    margin: 1rem 1rem 0.5rem;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    width: auto;
+  }
+  .footer__localization h2 {
+    margin: 1rem 1rem 0.5rem;
+    color: var(--color-foreground-75);
+  }
+  @media screen and (min-width: 750px) {
+    .footer__localization {
+      padding: 0.4rem 0;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+    }
+    .localization-form {
+      padding: 1rem 2rem 1rem 0;
+    }
+    .localization-form:first-of-type {
+      padding-left: 0;
+    }
+    .localization-form:only-child {
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: start;
+      width: auto;
+      margin: 0 0 0 -1rem;
+    }
+    .localization-form:only-child .button,
+    .localization-form:only-child .localization-form__select {
+      margin: 1rem;
+    }
+  }
+  @media screen and (max-width: 989px) {
+    noscript .localization-form:only-child,
+    .footer__localization noscript {
+      width: 100%;
+    }
+  }
+  .localization-form .button {
+    padding: 1rem;
+  }
+  .localization-form__currency {
+    display: inline-block;
+  }
+  @media screen and (max-width: 749px) {
+    .localization-form .button {
+      word-break: break-all;
+    }
+  }
+  .localization-form__select {
+    -webkit-box-shadow: 0 0 0 0.1rem var(--color-foreground-55);
+            box-shadow: 0 0 0 0.1rem var(--color-foreground-55);
+    position: relative;
+    margin-bottom: 1.5rem;
+    border: 0;
+    padding-left: 1rem;
+    text-align: left;
+  }
+  noscript .localization-form__select {
+    padding-left: 0rem;
+  }
+  @media screen and (min-width: 750px) {
+    noscript .localization-form__select {
+      min-width: 20rem;
+    }
+  }
+  .localization-form__select .icon-caret {
+  /*   position: absolute; */
+    content: '';
+    height: 0.6rem;
+    right: 1.5rem;
+  /*   top: calc(50% - 0.35rem); */
+    top: 14px;
+  }
+  .localization-selector.link {
+    text-decoration: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: var(--color-foreground);
+    width: 100%;
+    padding-right: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  noscript .localization-selector.link {
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .disclosure .localization-form__select {
+    padding-top: 1.5rem;
+  }
+  .localization-selector option {
+    color: #000000;
+  }
+  .localization-selector + .disclosure__list {
+    margin-left: 1rem;
+    opacity: 1;
+    -webkit-animation: animateLocalization var(--duration-default) ease;
+            animation: animateLocalization var(--duration-default) ease;
+    bottom: auto;
+    top: 50px;
+    background: #373737;
+  }
+
+  .menu-drawer .icon-plus,
+  .menu-drawer .icon-minus{
+    width: 1.3rem;
+  }
+  .menu-drawer__menu-item>.icon-plus,
+  .menu-drawer__menu-item>.icon-minus {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .menu-drawer .menu-opening .icon-minus{
+    display: none;
+  }
+  .menu-drawer .menu-opening[open] .icon-minus{
+    width: 1.3rem;
+    display: block;
+  }
+  .menu-drawer .menu-opening[open] .icon-plus{
+    display: none;
+  }
+
+  .js .menu-drawer__submenu {
+    position: unset;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-background);
+      border-left: .1rem solid var(--color-foreground-20);
+        z-index: 1;
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+        visibility: hidden;
+        }
+  .menu-drawer__close-button,
+  .menu-drawer__utility-links{
+    display: none;
+  }
+  .menu-drawer__menu-item {
+    padding: 0rem 3.2rem;
+    text-decoration: none;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 240%;
+    letter-spacing: 0em;
+    color: #000000;
+}
+  .menu-drawer .list-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    max-height: auto;
+}
+  .last-link {
+    padding-bottom: 20px;
+}
+.summary-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000000;
+}
+@media (max-width: 767px) {
+  .header__search {
+    width: 50px;
+    position: absolute;
+    left: 55px;
+    top: 0px;
+  }
+  .header__icon:hover .icon {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  .search-modal__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 8rem;
+    padding: 15px 5rem 15px 1rem;
+    line-height: calc(1 + .8 / var(--font-body-scale));
+    position: absolute;
+    top: 40px;
+    background: #fff;
+    left: -55px;
+    right: 0;
+    margin: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+  .field input.search__input, .field__input.search__input{
+   border-radius: 4px;
+}
+@media (max-width: 767px) and (min-width: 440px){
+  .header__search {
+    width: 50px;
+    position: absolute;
+    left: 55px;
+    top: 10px;
+  }
+  .search-modal__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 8rem;
+    padding: 15px 5rem 15px 1rem;
+    line-height: calc(1 + .8 / var(--font-body-scale));
+    position: absolute;
+    top: 50px;
+    background: #fff;
+    left: -55px;
+    right: 0;
+    margin: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .header__icon:hover .icon {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+  @media (min-width: 767px) {
+    .search-modal.modal__content {
+      width: calc(100% - 160px);
+      right: 0;
+      left: auto;
+    }
+    .search-modal__content {
+      justify-content: end;
+    }
+  }
+  .predictive-search__item--link {
+    display:flex;
+}
+  .field input.search__input:focus-visible, .field__input.search__input:focus-visible{
+   box-shadow: 0 0 0 .1rem var(--color-foreground-55);
+}
+}
+</style>
+<{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} page-width page-width-full {% if section.settings.menu_mobile != blank %} header--has-menu{% endif %}">
+    {%- if section.settings.menu_mobile != blank -%}
+      <header-drawer>
+        <details class="menu-drawer-container">
+          <summary class="header__icon header__icon--menu header__icon--summary link link--text focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
+            <span>
+              {% render 'icon-hamburger' %}
+              {% comment %}{% render 'icon-close' %}{% endcomment %}
+            </span>
+          </summary>
+          <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
+            <div class="menu-drawer__inner-container">
+              <div class="menu-drawer__navigation-container">
+
+                <nav class="menu-drawer__navigation">
+                  <ul class="menu-drawer__menu list-menu" role="list">
+      <li>
+                      <details>
+                          <summary class="menu-drawer__mobil--sale menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="/collections/new-arrivals">
+                              <span class="menu-drawer__mobil--sale-span{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                Нове
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                            <div class="menu-drawer__inner-submenu">
+                              <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                {% render 'icon-arrow' %}
+                                {{ link.title | escape }}
+                              </button>
+                  <ul class="menu-drawer__menu menu-drawer__menu-item--sun list-menu" role="list">
+                    {% assign sale_collection = collections['new-arrivals'] %}
+                    {% assign cur_tags = sale_collection.all_tags %}
+                    {% assign col_tag = 'Чоловікам+Чоловіче,Жінкам+Жіноче,Аксесуари+Аксесуари,Взуття+Взуття,Lifestyle+Lifestyle' | split: ',' %}
+                    {% assign found_tag = false %}
+                    {% for ct in col_tag %}
+                    {% assign ct_tag = ct | split: '+' %}
+                    {% assign ct_tag_collection = ct_tag | first %}
+                    {% assign ct_tag_tag = ct_tag | last %}
+                    {% assign ct_tag_tag_downcase = ct_tag_tag | downcase %}
+                    {% if cur_tags contains ct_tag_tag or cur_tags contains ct_tag_tag_downcase %}
+                      {% else %}
+                        {% continue %}
+                    {% endif %}
+                    {%- unless ct_tag_collection contains cur_tags -%}
+                      <li>
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="{% if ct_tag_collection == 'Чоловікам' %}/collections/sale/чоловіче{% elsif ct_tag_collection == 'Жінкам' %}/collections/sale/жіноче{% elsif ct_tag_collection == 'Аксесуари' %}/collections/sale/Аксесуари{% elsif ct_tag_collection == 'Взуття' %}/collections/sale/взуття{% elsif ct_tag_collection == 'Lifestyle' %}/collections/sale/lifestyle{% endif %}">
+                              <span class="menu-drawer__mobil--sale-span__sun{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                {{ ct_tag_collection | escape }}
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                            <div class="menu-drawer__inner-submenu">
+                              <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                {% render 'icon-arrow' %}
+                                {{ link.title | escape }}
+                              </button>
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for link in linklists.sidebar-menu.links -%}
+                                    {% if link.title == ct_tag_collection %}
+                                      {% for sub_link in link.links -%}
+                                        {% assign nav_tag = sub_link.title %}
+                                        {% assign nav_tag_downcase = sub_link.title | downcase %}
+                                        {% if ct_tag_tag_downcase == 'жіноче' or ct_tag_tag_downcase == 'чоловіче' %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: ct_tag_tag_downcase | append: '+' | append: nav_tag_downcase %}
+                                        {% else %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: nav_tag_downcase %}
+                                        {% endif %}
+                                        {% paginate sale_collection.products by 5000 %}
+                                          {% assign lifestile_tag = 'Для домашніх улюбленців+Для собак,Скейтбордінг+Дошка для скейтбордингу,Для вечірок+Вечірка,Папір для самокруток+Папір для самокруток' | split: ',' %}
+                                          {% for lt in lifestile_tag %}
+                                            {% assign lt_tag = lt | split: '+' %}
+                                            {% assign lt_tag_collection = lt_tag | first %}
+                                            {% assign lt_tag_tag = lt_tag | last %}
+                                            {% assign lt_tag_tag_downcase = lt_tag_tag | downcase %}
+                                            {% if forloop.index > 1 and sub_link.title != 'Для домашніх улюбленців' and sub_link.title != 'Скейтбордінг' and sub_link.title != 'Для вечірок' %}
+                                              {% break %}
+                                            {% else %}
+                                              {% for p in sale_collection.products %}
+                                                {% if p.tags contains nav_tag and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains lt_tag_tag and nav_tag contains lt_tag_collection %}
+                                                  {% assign lt_tag_tag_url = lt_tag_tag | split: ' ' %}
+                                                  {% assign lt_tag_tag_url_j = lt_tag_tag_url | join: '-' %}
+                                                  {% assign navl_url = sale_collection.url | append: '/' | append: lt_tag_tag_url_j %}
+                                                  <li>
+                                                    <a href="{{ navl_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% endif %}
+                                              {% endfor %}
+                                            {% endif %}
+                                          {%- endfor -%}
+                                        {% endpaginate %}
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        </li>
+                      {%- endunless -%}
+                    {% endfor %}
+                    {% if found_tag %}
+                      <li>
+                        {% comment %} Бренди {% endcomment %}
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="/collections/brands">
+                              <span class="menu-drawer__mobil--sale-span__sun{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                Бренди
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                              <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                {% assign ua_brands = '' %}
+                                {%- for link in linklists.sidebar-menu.links -%}
+                                  {%- unless link.title == 'Бренди' -%}
+                                    {%- continue -%}
+                                  {%- endunless -%}
+                                  {% for sub_link in link.links -%}
+                                    {% comment %} {{ sub_link.title }} {% endcomment %}
+                                    {%- if sub_link.title contains ' 🇺🇦' -%}
+                                      {%- assign cur_brand = sub_link.title | replace: ' 🇺🇦', '' -%}
+                                      {%- assign ua_brands = ua_brands | append: cur_brand | append: '~' -%}
+                                    {%- endif -%}
+                                  {%- endfor %}
+                                {%- endfor %}
+                                {% assign ua_brands_array = ua_brands | split: '~' | sort %}
+                                {% assign sale_brands = '' %}
+                                {% paginate sale_collection.products by 5000 %}
+                                  {% for p in sale_collection.products %}
+                                    {% assign cur_brand = p.vendor %}
+                                    {% unless sale_brands contains cur_brand %}
+                                      {% assign sale_brands = sale_brands | append: cur_brand | append: '~' %}
+                                    {% endunless %}
+                                  {%- endfor %}
+                                {% endpaginate %}
+                                {% assign sale_brands_array = sale_brands | split: '~' | sort %}
+                                {% for br in sale_brands_array %}
+                                  <li>
+                                    <a href="{{ sale_collection.url | append: '?filter.p.vendor=' | append: br }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                      {%- if ua_brands_array contains br -%}
+                                        {{ br | append: ' 🇺🇦' | escape }}
+                                      {%- else -%}
+                                        {{ br | escape }}
+                                      {%- endif -%}
+                                    </a>
+                                  </li>
+                                {%- endfor %}
+                              </ul>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </details>
+                        </li>
+                    {%- for link in section.settings.menu_mobile.links -%}
+                      <li>
+                        {%- if link.links != blank -%}
+                          <details>
+                            <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                              <a class="summary-link" href="{{ link.url }}"><span>
+                                {{ link.title | escape }}
+                                </span></a>
+                              {% render 'icon-plus' %}
+                              {% render 'icon-minus' %}
+                              {% comment %}
+                              {% render 'icon-caret' %}
+                              {% endcomment %}
+                            </summary>
+                            <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for childlink in link.links -%}
+                                    <li {% if forloop.last %} class="last-link" {% endif %}>
+                                      {%- if childlink.links == blank -%}
+                                        <a href="{{ childlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                          {{ childlink.title | escape }}
+                                        </a>
+                                      {%- else -%}
+                                        <details>
+                                          <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            {{ childlink.title | escape }}
+                                            {% render 'icon-arrow' %}
+                                            {% render 'icon-caret' %}
+                                          </summary>
+                                          <div id="childlink-{{ childlink.title | escape }}" class="menu-drawer__submenu motion-reduce">
+                                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                              {% render 'icon-arrow' %}
+                                              {{ childlink.title | escape }}
+                                            </button>
+                                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                              {%- for grandchildlink in childlink.links -%}
+                                                <li>
+                                                  <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                    {{ grandchildlink.title | escape }}
+                                                  </a>
+                                                </li>
+                                              {%- endfor -%}
+                                            </ul>
+                                          </div>
+                                        </details>
+                                      {%- endif -%}
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        {%- else -%}
+                          <a href="{{ link.url }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                            {{ link.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                      {% if forloop.index == 6 %}
+                        <li>
+                      <details>
+                          <summary class="menu-drawer__mobil--sale menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="/collections/sale">
+                              <span class="menu-drawer__mobil--sale-span{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                SALE
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                            <div class="menu-drawer__inner-submenu">
+                              <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                {% render 'icon-arrow' %}
+                                {{ link.title | escape }}
+                              </button>
+                  <ul class="menu-drawer__menu menu-drawer__menu-item--sun list-menu" role="list">
+                    {% assign sale_collection = collections['sale'] %}
+                    {% assign cur_tags = sale_collection.all_tags %}
+                    {% assign col_tag = 'Чоловікам+Чоловіче,Жінкам+Жіноче,Аксесуари+Аксесуари,Взуття+Взуття,Lifestyle+Lifestyle' | split: ',' %}
+                    {% assign found_tag = false %}
+                    {% for ct in col_tag %}
+                    {% assign ct_tag = ct | split: '+' %}
+                    {% assign ct_tag_collection = ct_tag | first %}
+                    {% assign ct_tag_tag = ct_tag | last %}
+                    {% assign ct_tag_tag_downcase = ct_tag_tag | downcase %}
+                    {% if cur_tags contains ct_tag_tag or cur_tags contains ct_tag_tag_downcase %}
+                      {% else %}
+                        {% continue %}
+                    {% endif %}
+                    {%- unless ct_tag_collection contains cur_tags -%}
+                      <li>
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="{% if ct_tag_collection == 'Чоловікам' %}/collections/sale/чоловіче{% elsif ct_tag_collection == 'Жінкам' %}/collections/sale/жіноче{% elsif ct_tag_collection == 'Аксесуари' %}/collections/sale/Аксесуари{% elsif ct_tag_collection == 'Взуття' %}/collections/sale/взуття{% elsif ct_tag_collection == 'Lifestyle' %}/collections/sale/lifestyle{% endif %}">
+                              <span class="menu-drawer__mobil--sale-span__sun{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                {{ ct_tag_collection | escape }}
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                            <div class="menu-drawer__inner-submenu">
+                              <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                {% render 'icon-arrow' %}
+                                {{ link.title | escape }}
+                              </button>
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for link in linklists.sidebar-menu.links -%}
+                                    {% if link.title == ct_tag_collection %}
+                                      {% for sub_link in link.links -%}
+                                        {% assign nav_tag = sub_link.title %}
+                                        {% assign nav_tag_downcase = sub_link.title | downcase %}
+                                        {% if ct_tag_tag_downcase == 'жіноче' or ct_tag_tag_downcase == 'чоловіче' %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: ct_tag_tag_downcase | append: '+' | append: nav_tag_downcase %}
+                                        {% else %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: nav_tag_downcase %}
+                                        {% endif %}
+                                        {% paginate sale_collection.products by 5000 %}
+                                          {% assign lifestile_tag = 'Для домашніх улюбленців+Для собак,Скейтбордінг+Дошка для скейтбордингу,Для вечірок+Вечірка,Папір для самокруток+Папір для самокруток' | split: ',' %}
+                                          {% for lt in lifestile_tag %}
+                                            {% assign lt_tag = lt | split: '+' %}
+                                            {% assign lt_tag_collection = lt_tag | first %}
+                                            {% assign lt_tag_tag = lt_tag | last %}
+                                            {% assign lt_tag_tag_downcase = lt_tag_tag | downcase %}
+                                            {% if forloop.index > 1 and sub_link.title != 'Для домашніх улюбленців' and sub_link.title != 'Скейтбордінг' and sub_link.title != 'Для вечірок' %}
+                                              {% break %}
+                                            {% else %}
+                                              {% for p in sale_collection.products %}
+                                                {% if p.tags contains nav_tag and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains lt_tag_tag and nav_tag contains lt_tag_collection %}
+                                                  {% assign lt_tag_tag_url = lt_tag_tag | split: ' ' %}
+                                                  {% assign lt_tag_tag_url_j = lt_tag_tag_url | join: '-' %}
+                                                  {% assign navl_url = sale_collection.url | append: '/' | append: lt_tag_tag_url_j %}
+                                                  <li>
+                                                    <a href="{{ navl_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% endif %}
+                                              {% endfor %}
+                                            {% endif %}
+                                          {%- endfor -%}
+                                        {% endpaginate %}
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        </li>
+                      {%- endunless -%}
+                    {% endfor %}
+                    {% if found_tag %}
+                      <li>
+                        {% comment %} Бренди {% endcomment %}
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="/collections/brands">
+                              <span class="menu-drawer__mobil--sale-span__sun{%- if link.child_active %} header__active-menu-item{% endif %}">
+                                Бренди
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                              <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                {% assign ua_brands = '' %}
+                                {%- for link in linklists.sidebar-menu.links -%}
+                                  {%- unless link.title == 'Бренди' -%}
+                                    {%- continue -%}
+                                  {%- endunless -%}
+                                  {% for sub_link in link.links -%}
+                                    {% comment %} {{ sub_link.title }} {% endcomment %}
+                                    {%- if sub_link.title contains ' 🇺🇦' -%}
+                                      {%- assign cur_brand = sub_link.title | replace: ' 🇺🇦', '' -%}
+                                      {%- assign ua_brands = ua_brands | append: cur_brand | append: '~' -%}
+                                    {%- endif -%}
+                                  {%- endfor %}
+                                {%- endfor %}
+                                {% assign ua_brands_array = ua_brands | split: '~' | sort %}
+                                {% assign sale_brands = '' %}
+                                {% paginate sale_collection.products by 5000 %}
+                                  {% for p in sale_collection.products %}
+                                    {% assign cur_brand = p.vendor %}
+                                    {% unless sale_brands contains cur_brand %}
+                                      {% assign sale_brands = sale_brands | append: cur_brand | append: '~' %}
+                                    {% endunless %}
+                                  {%- endfor %}
+                                {% endpaginate %}
+                                {% assign sale_brands_array = sale_brands | split: '~' | sort %}
+                                {% for br in sale_brands_array %}
+                                  <li>
+                                    <a href="{{ sale_collection.url | append: '?filter.p.vendor=' | append: br }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                      {%- if ua_brands_array contains br -%}
+                                        {{ br | append: ' 🇺🇦' | escape }}
+                                      {%- else -%}
+                                        {{ br | escape }}
+                                      {%- endif -%}
+                                    </a>
+                                  </li>
+                                {%- endfor %}
+                              </ul>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </details>
+                        </li>
+                      {% endif %}
+                    {%- endfor -%}
+                  </ul>
+                </nav>
+
+                <!-- {% if collection.title == 'SALE' %}
+                  <nav class="menu-drawer__navigation">
+                  <ul class="menu-drawer__menu list-menu" role="list">
+                    {% assign sale_collection = collections[collection.handle] %}
+                    {% assign cur_tags = sale_collection.all_tags %}
+                    {% assign col_tag = 'Чоловікам+Чоловіче,Жінкам+Жіноче,Аксесуари+Аксесуари,Взуття+Взуття,Lifestyle+Lifestyle' | split: ',' %}
+                    {% assign found_tag = false %}
+                    {% for ct in col_tag %}
+                    {% assign ct_tag = ct | split: '+' %}
+                    {% assign ct_tag_collection = ct_tag | first %}
+                    {% assign ct_tag_tag = ct_tag | last %}
+                    {% assign ct_tag_tag_downcase = ct_tag_tag | downcase %}
+                    {% if cur_tags contains ct_tag_tag or cur_tags contains ct_tag_tag_downcase %}
+                      {% else %}
+                        {% continue %}
+                    {% endif %}
+                    {%- unless ct_tag_collection contains cur_tags -%}
+                      <li>
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="{% if ct_tag_collection == 'Чоловікам' %}/collections/sale/чоловіче{% elsif ct_tag_collection == 'Жінкам' %}/collections/sale/жіноче{% elsif ct_tag_collection == 'Аксесуари' %}/collections/sale/Аксесуари{% elsif ct_tag_collection == 'Взуття' %}/collections/sale/взуття{% elsif ct_tag_collection == 'Lifestyle' %}/collections/sale/lifestyle{% endif %}">
+                              <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                                {{ ct_tag_collection | escape }}
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                            <div class="menu-drawer__inner-submenu">
+                              <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                {% render 'icon-arrow' %}
+                                {{ link.title | escape }}
+                              </button>
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for link in linklists.sidebar-menu.links -%}
+                                    {% if link.title == ct_tag_collection %}
+                                      {% for sub_link in link.links -%}
+                                        {% assign nav_tag = sub_link.title %}
+                                        {% assign nav_tag_downcase = sub_link.title | downcase %}
+                                        {% if ct_tag_tag_downcase == 'жіноче' or ct_tag_tag_downcase == 'чоловіче' %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: ct_tag_tag_downcase | append: '+' | append: nav_tag_downcase %}
+                                        {% else %}
+                                          {% assign nav_url = sale_collection.url | append: '/' | append: nav_tag_downcase %}
+                                        {% endif %}
+                                        {% paginate sale_collection.products by 5000 %}
+                                          {% assign lifestile_tag = 'Для домашніх улюбленців+Для собак,Скейтбордінг+Дошка для скейтбордингу,Для вечірок+Вечірка,Папір для самокруток+Папір для самокруток' | split: ',' %}
+                                          {% for lt in lifestile_tag %}
+                                            {% assign lt_tag = lt | split: '+' %}
+                                            {% assign lt_tag_collection = lt_tag | first %}
+                                            {% assign lt_tag_tag = lt_tag | last %}
+                                            {% assign lt_tag_tag_downcase = lt_tag_tag | downcase %}
+                                            {% if cur_tags contains lt_tag_tag or cur_tags contains lt_tag_tag_downcase and ct_tag_collection == 'Lifestyle' %}
+                                              {% else %}
+                                                {% continue %}
+                                            {% endif %}
+                                            {% if forloop.index > 1 and sub_link.title != 'Для домашніх улюбленців' and sub_link.title != 'Скейтбордінг' and sub_link.title != 'Для вечірок' %}
+                                              {% break %}
+                                            {% else %}
+                                              {% for p in sale_collection.products %}
+                                                {% if p.tags contains nav_tag and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag and p.tags contains ct_tag_tag_downcase %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag %}
+                                                  <li>
+                                                    <a href="{{ nav_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% elsif p.tags contains lt_tag_tag and nav_tag contains lt_tag_collection %}
+                                                  {% assign lt_tag_tag_url = lt_tag_tag | split: ' ' %}
+                                                  {% assign lt_tag_tag_url_j = lt_tag_tag_url | join: '-' %}
+                                                  {% assign navl_url = sale_collection.url | append: '/' | append: lt_tag_tag_url_j %}
+                                                  <li>
+                                                    <a href="{{ navl_url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                                      {{ sub_link.title | escape }}
+                                                    </a>
+                                                  </li>
+                                                  {% assign found_tag = true %}
+                                                  {% break %}
+                                                {% endif %}
+                                              {% endfor %}
+                                            {% endif %}
+                                          {%- endfor -%}
+                                        {% endpaginate %}
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        </li>
+                      {%- endunless -%}
+                    {% endfor %}
+
+                    {% if found_tag %}
+                      <li>
+                        {% comment %} Бренди {% endcomment %}
+                        <details>
+                          <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                            <a class="summary-link" href="/collections/brands">
+                              <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                                Бренди
+                              </span>
+                            </a>
+                            {% render 'icon-plus' %}
+                            {% render 'icon-minus' %}
+                          </summary>
+                          <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                              <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                {% assign ua_brands = '' %}
+                                {%- for link in linklists.sidebar-menu.links -%}
+                                  {%- unless link.title == 'Бренди' -%}
+                                    {%- continue -%}
+                                  {%- endunless -%}
+                                  {% for sub_link in link.links -%}
+                                    {% comment %} {{ sub_link.title }} {% endcomment %}
+                                    {%- if sub_link.title contains ' 🇺🇦' -%}
+                                      {%- assign cur_brand = sub_link.title | replace: ' 🇺🇦', '' -%}
+                                      {%- assign ua_brands = ua_brands | append: cur_brand | append: '~' -%}
+                                    {%- endif -%}
+                                  {%- endfor %}
+                                {%- endfor %}
+                                {% assign ua_brands_array = ua_brands | split: '~' | sort %}
+                                {% assign sale_brands = '' %}
+                                {% paginate sale_collection.products by 5000 %}
+                                  {% for p in sale_collection.products %}
+                                    {% assign cur_brand = p.vendor %}
+                                    {% unless sale_brands contains cur_brand %}
+                                      {% assign sale_brands = sale_brands | append: cur_brand | append: '~' %}
+                                    {% endunless %}
+                                  {%- endfor %}
+                                {% endpaginate %}
+                                {% assign sale_brands_array = sale_brands | split: '~' | sort %}
+                                {% for br in sale_brands_array %}
+                                  <li>
+                                    <a href="{{ sale_collection.url | append: '?filter.p.vendor=' | append: br }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                      {%- if ua_brands_array contains br -%}
+                                        {{ br | append: ' 🇺🇦' | escape }}
+                                      {%- else -%}
+                                        {{ br | escape }}
+                                      {%- endif -%}
+                                    </a>
+                                  </li>
+                                {%- endfor %}
+                              </ul>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    {% endif %}
+                    <li>
+                      <details>
+                        <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                          <a class="summary-link" href="/pages/about-us">
+                            <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                              Про нас
+                            </span>
+                          </a>
+                        </summary>
+                      </details>
+                    </li>
+                    <li>
+                      <details>
+                        <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                          <a class="summary-link" href="/pages/faq">
+                            <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                              FAQ
+                            </span>
+                          </a>
+                        </summary>
+                      </details>
+                    </li>
+                    <li>
+                      <details>
+                        <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                          <a class="summary-link" href="/pages/contact">
+                            <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                              Контакти
+                            </span>
+                          </a>
+                        </summary>
+                      </details>
+                    </li>
+                    <li>
+                      <details>
+                        <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                          <a class="summary-link" href="#">
+                            <span {%- if link.child_active %}class="header__active-menu-item"{% endif %}>
+                              Social
+                            </span>
+                          </a>
+                          {% render 'icon-plus' %}
+                          {% render 'icon-minus' %}
+                        </summary>
+                        <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                          <div class="menu-drawer__inner-submenu">
+                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                              {% render 'icon-arrow' %}
+                              {{ link.title | escape }}
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              <li>
+                                <a href="https://www.instagram.com/newbornk.kyiv/" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                  INSTAGRAM
+                                </a>
+                              </li>
+                              <li>
+                                <a href="https://www.facebook.com/newborn.kyiv" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                  FACEBOOK
+                                </a>
+                              </li>
+                              <li>
+                                <a href="https://t.me/newbornk" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                  TELEGRAM
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    </li>
+                  </ul>
+                </nav>
+                {% endif %} -->
+                <div class="menu-drawer__utility-links">
+                  {%- if shop.customer_accounts_enabled -%}
+                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link link--text focus-inset h5">
+                      {% render 'icon-account' %}
+                      {%- liquid
+                        if customer
+                          echo 'customer.account_fallback' | t
+                        else
+                          echo 'customer.log_in' | t
+                        endif
+                      -%}
+                    </a>
+                  {%- endif -%}
+                  <ul class="list list-social list-unstyled" role="list">
+                    {%- if settings.social_twitter_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-twitter' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_facebook_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_facebook_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-facebook' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_pinterest_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_pinterest_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-pinterest' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_instagram_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_instagram_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-instagram' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_tumblr_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_tumblr_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-tumblr' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_snapchat_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_snapchat_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-snapchat' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_youtube_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-youtube' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                    {%- if settings.social_vimeo_link != blank -%}
+                      <li class="list-social__item">
+                        <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                          {%- render 'icon-vimeo' -%}
+                          <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </header-drawer>
+    {%- endif -%}
+
+    {%- if section.settings.logo_position == 'top-center' or section.settings.menu_mobile == blank -%}
+      <!--details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-search"/>
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="search-modal__content" tabindex="-1">
+              <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                <div class="field">
+                  <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}">
+                  <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                  <input type="hidden" name="options[prefix]" value="last">
+                  <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                    <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                      <use href="#icon-search"/>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+              <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal-->
+    <details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-search"/>
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="modal-overlay"></div>
+            <div class="search-modal__content" tabindex="-1">
+              {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+              {%- endif -%}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input"
+                      id="Search-In-Modal-1"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ 'general.search.search' | t }}"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {%- endif -%}
+                    >
+                    <label class="field__label" for="Search-In-Modal-1">{{ 'general.search.search' | t }}</label>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                      <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                  {%- endif -%}
+                </form>
+              {%- if settings.predictive_search_enabled -%}
+                </predictive-search>
+              {%- endif -%}
+              <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal>
+    {%- endif -%}
+
+    {%- if request.page_type == 'index' -%}
+      <h1 class="header__heading">
+    {%- endif -%}
+        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+          {%- if section.settings.logo != blank -%}
+            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+            <!--img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+              src="{{ section.settings.logo | img_url: image_size }}"
+              loading="lazy"
+              class="header__heading-logo"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            -->
+          {% render 'icon-logo' %}
+
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+    {%- if request.page_type == 'index' -%}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="header__inline-menu" {%- if section.settings.menu_position == 'center' -%} style="margin: auto;"  {%- endif -%}>
+        <ul class="list-menu list-menu--inline" role="list">
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              {%- if link.links != blank -%}
+                <details-disclosure>
+                  <details>
+                    <summary class="header__menu-item list-menu__item link focus-inset">
+                      <span {% if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                      {% render 'icon-caret' %}
+                    </summary>
+                    <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
+                      {%- for childlink in link.links -%}
+                        <li>
+                          {%- if childlink.links == blank -%}
+                            <a href="{{ childlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                              {{ childlink.title | escape }}
+                            </a>
+                          {%- else -%}
+                            <details>
+                              <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                                {{ childlink.title | escape }}
+                                {% render 'icon-caret' %}
+                              </summary>
+                              <ul class="header__submenu list-menu motion-reduce">
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li>
+                                    <a href="{{ grandchildlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                      {{ grandchildlink.title | escape }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </details>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </details>
+                </details-disclosure>
+              {%- else -%}
+                <a href="{{ link.url }}" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset {% if link.current %} header__active-menu-item {% endif %}" {% if link.current %} aria-current="page"{% endif %}>
+                  <span {% if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="header__icons">
+      <style>
+        .trm-header .header__icon.header__icon--search .visually-hidden{
+          padding:1.8rem 1.2rem;
+          margin-top: 1px;
+        }
+        @media (max-width:767px) {
+          .trm-header .header__icon.header__icon--search.header__icon--account {
+            display: block;
+          }
+
+            .trm-header .header__icon--account.header__icon--search svg.icon-search {
+              display: flex;
+              height: 100%;
+          }
+
+          .trm-header .header__icon.header__icon--search .visually-hidden{
+          display: block;
+        }
+
+        }
+        @media (max-width:750px) {
+          .trm-header .header__icon.header__icon--search .visually-hidden,
+          .trm-header .header__icon.header__icon--wishlist .visually-hidden{
+              display: none;
+          }
+        }
+      </style>
+
+      {% if settings.show_wishlist == true %}
+        {% comment %}{% render 'wishlisthero-header-icon' %}{% endcomment %}
+        <a href="#hero-wishlist" class="header__icon header__icon--wishlist link link--text focus-inset">
+          <span class="visually-hidden">{{ 'wishlist.header_link' | t }}</span>
+          {% render 'icon-wishlist' %}
+        </a>
+      {% endif %}
+
+      {%- comment -%}
+      <div class="header__icon header__icon--localization">
+        <noscript>
+          {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
+          <div class="localization-form__select">
+            <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+            <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
+              {%- for language in localization.available_languages -%}
+              <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                {{ language.endonym_name | capitalize }}
+              </option>
+              {%- endfor -%}
+            </select>
+            {% render 'icon-caret' %}
+          </div>
+          <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+          {%- endform -%}
+        </noscript>
+        <style>
+
+        </style>
+        <localization-form>
+          {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+          {% if localization.language.iso_code == 'uk'%}
+            {% assign localization_language_iso_code = 'uk' %}
+          {% else %}
+            {% assign localization_language_iso_code = localization.language.iso_code %}
+          {% endif %}
+          <div class="no-js-hidden">
+            <div class="ok disclosure">
+              <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
+                <span>{{ localization_language_iso_code | upcase }}</span>
+                {% render 'icon-caret' %}
+              </button>
+              <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled" hidden>
+                {%- for language in localization.available_languages -%}
+                {% if language.iso_code == 'uk'%}
+                  {% assign language_iso_code = 'uk' %}
+                {% else %}
+                  {% assign language_iso_code = language.iso_code %}
+                {% endif %}
+                <li class="disclosure__item" tabindex="-1">
+                  <a class="link link--text disclosure__link caption-large{% if language_iso_code == localization_language_iso_code %} disclosure__link--active{% endif %} focus-inset"
+                    href="/{% unless language.primary %}{{ language.iso_code }}{% endunless %} " hreflang="{{ language.iso_code }}"
+                    lang="{{ language.iso_code }}"
+                    {% if language_iso_code == localization_language_iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
+                    {{ language.name | capitalize }}
+                  </a>
+                </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+          </div>
+        {%- endform -%}
+      </localization-form>
+    </div>
+    {%- endcomment -%}
+
+    {%- if section.settings.show_search -%}
+      <details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--account  link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span class="visually-hidden small-hide">{{ 'general.search.search' | t }}</span>
+              <svg class="modal__toggle-open icon icon-search medium-hide large-up-hide" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-search"/>
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close"/>
+              </svg>
+
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="modal-overlay"></div>
+            <div class="search-modal__content" tabindex="-1">
+              {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+              {%- endif -%}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input"
+                      id="Search-In-Modal"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ 'general.search.search' | t }}"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {%- endif -%}
+                    >
+                    <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button class="search__button field__button medium-hide large-up-hide small-hide" aria-label="{{ 'general.search.search' | t }}">
+                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                      <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                  {%- endif -%}
+                </form>
+              {%- if settings.predictive_search_enabled -%}
+                </predictive-search>
+              {%- endif -%}
+              <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal>
+      <!--details-modal class="header__search">
+        <details>
+          <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-search">
+              </svg>
+              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                <use href="#icon-close">
+              </svg>
+            </span>
+          </summary>
+          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="search-modal__content" tabindex="-1">
+              <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                <div class="field">
+                  <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}">
+                  <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                  <input type="hidden" name="options[prefix]" value="last">
+                  <button class="search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">
+                    <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                      <use href="#icon-search">
+                    </svg>
+                  </button>
+                </div>
+              </form>
+              <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                  <use href="#icon-close">
+                </svg>
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal-->
+
+     {%- endif -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link link--text focus-inset">
+          {% render 'icon-account' %}
+          <span class="visually-hidden">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+        {%- comment -%}
+        {%- liquid
+          if cart == empty
+            render 'icon-cart-empty'
+          else
+            render 'icon-cart'
+          endif
+        -%}
+        {%- endcomment -%}
+        {%- render 'icon-cart' -%}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </span>
+      </a>
+    </div>
+  </header>
+</{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
+{% comment %}
+{%- if request.page_type != 'cart' -%}
+  {%- render 'cart-notification' -%}
+{%- endif -%}
+{% endcomment %}
+{% javascript %}
+  class StickyHeader extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.header = document.getElementById('shopify-section-header');
+      this.headerBounds = {};
+      this.currentScrollTop = 0;
+
+      this.onScrollHandler = this.onScroll.bind(this);
+
+      window.addEventListener('scroll', this.onScrollHandler, false);
+
+      this.createObserver();
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.onScrollHandler);
+    }
+
+    createObserver() {
+      let observer = new IntersectionObserver((entries, observer) => {
+        this.headerBounds = entries[0].intersectionRect;
+        observer.disconnect();
+      });
+
+      observer.observe(this.header);
+    }
+
+    onScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        requestAnimationFrame(this.hide.bind(this));
+      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        requestAnimationFrame(this.reveal.bind(this));
+      } else if (scrollTop <= this.headerBounds.top) {
+        requestAnimationFrame(this.reset.bind(this));
+      }
+
+      this.currentScrollTop = scrollTop;
+    }
+
+    hide() {
+      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+      this.closeMenuDisclosure();
+      this.closeSearchModal();
+    }
+
+    reveal() {
+      this.header.classList.add('shopify-section-header-sticky', 'animate');
+      this.header.classList.remove('shopify-section-header-hidden');
+    }
+
+    reset() {
+      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
+    }
+
+    closeMenuDisclosure() {
+      this.disclosures = this.disclosures || this.header.querySelectorAll('details-disclosure');
+      this.disclosures.forEach(disclosure => disclosure.close());
+    }
+
+    closeSearchModal() {
+      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
+      this.searchModal.close(false);
+    }
+  }
+
+  customElements.define('sticky-header', StickyHeader);
+
+
+  class LocalizationFormHeader extends HTMLElement {
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('ul'),
+      };
+      this.elements.button.addEventListener('click', this.openSelector.bind(this));
+      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    onItemClick(event) {
+      event.preventDefault();
+      this.elements.input.value = event.currentTarget.dataset.value;
+      this.querySelector('form')?.submit();
+    }
+
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.panel.toggleAttribute('hidden');
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+      if (event.relatedTarget === null || shouldClose) {
+        this.elements.button.setAttribute('aria-expanded', 'false');
+        this.elements.panel.setAttribute('hidden', true);
+      }
+    }
+  }
+
+  customElements.define('localization-form-header', LocalizationFormHeader);
+
+{% endjavascript %}
+
+<script>
+  //move lang on mobile
+  const parent = document.querySelector('.menu-drawer__navigation');
+  const item = document.querySelector('.header__icon--localization');
+
+  window.addEventListener('load', function (event) {
+    const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if (viewport_width < 990) {
+      parent.insertBefore(item, parent.children[0]);
+    }
+  });
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "class":"trm-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "t:sections.header.settings.logo_width.unit",
+      "label": "t:sections.header.settings.logo_width.label"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "top-left",
+          "label": "t:sections.header.settings.logo_position.options__2.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.header.settings.logo_position.options__3.label"
+        }
+      ],
+      "default": "middle-left",
+      "label": "t:sections.header.settings.logo_position.label"
+    },
+    {
+      "type": "select",
+      "id": "menu_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.menu_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.menu_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.header.settings.menu_position.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_mobile",
+      "default": "main-menu",
+      "label": "Mobile Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "default": true,
+      "label": "Search Enable"
+    }
+        /*
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "default": true,
+      "label": "t:sections.header.settings.enable_sticky_header.label",
+      "info": "t:sections.header.settings.enable_sticky_header.info"
+    }
+        */
+  ]
+}
+{% endschema %}

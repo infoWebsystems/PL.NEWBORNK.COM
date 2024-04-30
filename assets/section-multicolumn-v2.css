@@ -1,0 +1,10 @@
+.multicolumn-v2 .multicolumn-card__info p, .multicolumn-v2 .multicolumn-card__info h3 {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}

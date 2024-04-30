@@ -1,0 +1,201 @@
+{%- assign current_locale = request.locale.iso_code | upcase -%}
+<link rel="stylesheet" href="{{ 'section-slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'section-slideshow.css' | asset_url | stylesheet_tag }}</noscript>
+
+  <div class="slideshow no-heading">
+      <div class="swiper-container swiper-container-herro">
+        <ul class="swiper-wrapper"  style="width: 100vw; padding:0;">
+          {%- liquid
+            assign highest_ratio = 0
+            for block in section.blocks
+              if block.settings.image.aspect_ratio > highest_ratio
+                assign highest_ratio = block.settings.image.aspect_ratio
+                assign highest_ratio_phone = block.settings.image_phone.aspect_ratio
+              endif
+            endfor
+          -%}
+          {%- for block in section.blocks -%}
+          	{%- if block.settings.language contains current_locale or block.settings.language == blank -%}
+            {%- else -%}
+              {%- continue -%}
+            {%- endif -%}
+            <li class="swiper-slide">
+              <a class="link-wrapper" href="{{block.settings.banner_link}}">
+              <div class="slideshow-card">
+                {%- if block.settings.image != blank -%}
+                  {% if section.settings.image_ratio == 'adapt' or section.settings.image_ratio == 'circle' %}
+                    {% assign spaced_image = true %}
+                  {% endif %}
+                  <div class="slideshow-card__image-wrapper slideshow-card__image-wrapper--{{ section.settings.image_width }}-width
+                              {% if section.settings.image_width != 'full' or spaced_image %} slideshow-card-spacing{% endif %}">
+                    <div class="media media--transparent media--{{ section.settings.image_ratio }} small-hide"
+                      {% if section.settings.image_ratio == 'adapt' %}
+                        style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
+                      {% endif %}>
+                      <img src="{{ block.settings.image | img_url:'master' }}">                      
+                    </div>
+                    <div class="media media--transparent media--{{ section.settings.image_ratio }} large-up-hide medium-hide"
+                      {% if section.settings.image_ratio == 'adapt' %}
+                        style="padding-bottom: {{ 1 | divided_by: highest_ratio_phone | times: 100 }}%;"
+                      {% endif %}>
+                      <img src="{{ block.settings.image_phone | img_url:'master' }}">
+                    </div>
+                  </div>
+                {%- endif -%}
+
+              </div>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="swiper-pagination"></div>
+        
+        {%- if section.settings.swipe_on_mobile -%}
+          <div class="slider-buttons no-js-hidden medium-hide{% if section.blocks.size < 2 %} small-hide{% endif %}">
+            <div class="slider-counter caption">
+              <span class="slider-counter--current">1</span>
+              <span aria-hidden="true"> / </span>
+              <span class="visually-hidden">{{ 'accessibility.of' | t }}</span>
+              <span class="slider-counter--total">{{ section.blocks.size }}</span>
+            </div>
+            <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'accessibility.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+            <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">{% render 'icon-caret' %}</button>
+          </div>
+        {%- endif -%}
+        </div>
+ 
+
+
+
+  </div>
+  
+<script>
+var menu = [];
+
+const swiperherro = new Swiper('.swiper-container-herro', {
+      spaceBetween: 0,
+      slidesPerView: 1,
+      autoplay: {
+        delay: 6000,
+      },      
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        renderBullet: function(index, className) {
+          return `<div class="box ` + className + `"></div>`;
+        },
+      },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  
+
+  });
+
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.slideshow.name",
+  "class": "spaced-section spaced-section--full-width slideshow-herro-section",
+  "tag": "section",
+  "settings": [
+   {
+      "type": "select",
+      "id": "image_width",
+      "options": [
+        {
+          "value": "third",
+          "label": "t:sections.slideshow.settings.image_width.options__1.label"
+        },
+        {
+          "value": "half",
+          "label": "t:sections.slideshow.settings.image_width.options__2.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.slideshow.settings.image_width.options__3.label"
+        }
+      ],
+      "default": "full",
+      "label": "t:sections.slideshow.settings.image_width.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.slideshow.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.slideshow.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.slideshow.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "circle",
+          "label": "t:sections.slideshow.settings.image_ratio.options__4.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.slideshow.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "default": false,
+      "label": "t:sections.slideshow.settings.swipe_on_mobile.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "t:sections.slideshow.blocks.column.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.slideshow.blocks.column.settings.image.label"
+        },
+		{
+          "type": "image_picker",
+          "id": "image_phone",
+          "label": "Phone Image"
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Banner link"
+        },
+        {
+          "type": "text",
+          "id": "language",
+          "label": "Language",
+          "default": "UK"
+        }        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.slideshow.presets.name",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

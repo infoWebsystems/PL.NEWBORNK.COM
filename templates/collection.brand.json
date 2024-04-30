@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "product-grid": {
+      "type": "main-brand",
+      "settings": {
+        "products_per_page": 16,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "enable_filtering": true
+      }
+    }
+  },
+  "order": [
+    "product-grid"
+  ]
+}

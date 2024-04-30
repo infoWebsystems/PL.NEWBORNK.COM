@@ -1,0 +1,23 @@
+{%- for tag in product_card_product.tags -%}
+  {%- if tag == 'NEW' -%}
+    {%- comment -%}
+    <svg class="product-bage-new"  width="40" height="20" viewBox="0 0 130 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="130" height="67" rx="33.5" fill="white"/>
+      <path d="M51.9724 24V40.6088H51.4566L42.0948 24H39V42.4141H40.7021V25.8053H41.218L50.5797 42.4141H53.6745V24H51.9724Z" fill="black"/>
+      <path d="M59.963 40.8667V33.5939H68.7574V32.0465H59.963V25.5474H70.769V24H58.2609V42.4141H71.2075V40.8667H59.963Z" fill="black"/>
+      <path d="M82.0518 30.6022L78.2091 40.6088H77.6933L75.5527 24H73.8506L76.2232 42.4141H79.1891L83.0318 32.3302H83.5476L87.3645 42.4141H90.3304L92.7031 24H91.0267L88.8861 40.6088H88.3703L84.5276 30.6022H82.0518Z" fill="black"/>
+    </svg>
+    {%- endcomment -%}
+    <svg class="product-bage-new"  width="40" height="20" viewBox="0 0 130 67" style="enable-background:new 0 0 130 67;" >
+    <style type="text/css">
+      .st0{fill:#FFFFFF;}
+    </style>
+    <path d="M33.5,0h63C115,0,130,15,130,33.5l0,0C130,52,115,67,96.5,67h-63C15,67,0,52,0,33.5l0,0C0,15,15,0,33.5,0z"/>
+    <path class="st0" d="M52,24v16.6h-0.5L42.1,24H39v18.4h1.7V25.8h0.5l9.4,16.6h3.1V24H52z"/>
+    <path class="st0" d="M60,40.9v-7.3h8.8V32H60v-6.5h10.8V24H58.3v18.4h12.9v-1.5H60z"/>
+    <path class="st0" d="M82.1,30.6l-3.8,10h-0.5L75.6,24h-1.7l2.4,18.4h3L83,32.3h0.5l3.8,10.1h3L92.7,24H91l-2.1,16.6h-0.5l-3.8-10
+      H82.1z"/>
+    </svg>
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}

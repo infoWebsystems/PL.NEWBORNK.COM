@@ -1,0 +1,313 @@
+<link href="{{ 'contact-info-v2.css' | asset_url}}" rel="stylesheet" />
+
+<div class='contact page-width page-width--narrow'>
+  <div class='contact-block'>
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when '@app' -%}
+      {% render block %}
+    {%- when 'email' -%}
+      <div class="contact__row">
+        <h3 class='contact-block__title'>{{- 'templates.contact.form.email' | t -}}</h3>
+        <a href="mailto:{{- block.settings.email -}}" class="contact-block__text">{{- block.settings.email -}}</a>
+      </div>
+    {%- when 'phone' -%}
+      {%- assign phone = block.settings.phone | replace: "(", "" | replace: ")", "" | replace: " ", "" -%}
+    
+      <div class="contact__row">
+        <h3 class='contact-block__title'>{{- 'templates.contact.form.phone' | t -}}</h3>
+        <a href="tel:{{- phone -}}" class="contact-block__text">{{- block.settings.phone -}}</a>
+      </div>
+    
+    {%- when 'working_hours' -%}
+      {%- case block.settings.view -%}
+        {%- when "full" -%}
+          <div class="contact__row">
+            <h3 class='contact-block__title'>{{- 'templates.contact.form.work_time' | t -}}</h3>
+            <div class='contact-grid contact--work-time'>
+              
+              {%- unless block.settings.monday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.monday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.monday -}}</p>
+              </div>
+              {%- endunless -%}
+
+              {%- unless block.settings.tuesday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.tuesday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.tuesday -}}</p>
+              </div>
+              {%- endunless -%}
+              
+              {%- unless block.settings.wednesday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.wednesday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.wednesday -}}</p>
+              </div>
+              {%- endunless -%}
+              
+              {%- unless block.settings.thursday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.thursday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.thursday -}}</p>
+              </div>
+              {%- endunless -%}
+              
+              {%- unless block.settings.friday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.friday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.friday -}}</p>
+              </div>
+              {%- endunless -%}
+              
+              {%- unless block.settings.saturday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.saturday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.saturday -}}</p>
+              </div>
+              {%- endunless -%}
+              
+              {%- unless block.settings.sunday == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.sunday" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.sunday -}}</p>
+              </div>
+              {%- endunless -%}
+          </div>
+        </div>
+        {%- when "short" -%}
+          <div class="contact__row">
+            <h3 class='contact-block__title'>{{- 'templates.contact.form.work_time' | t -}}</h3>
+            <div class='contact-grid contact--work-time'>
+              
+              {%- unless block.settings.short_weekdays == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.short_weekdays" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.short_weekdays -}}</p>
+              </div>
+              {%- endunless -%}
+
+              {%- unless block.settings.short_weekend == blank -%}
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- "templates.days_of_week.short_weekend" | t -}}:</p>
+              </div>
+
+              <div class='contact-grid__item'>
+                <p class='contact-block__text'>{{- block.settings.short_weekend -}}</p>
+              </div>
+              {%- endunless -%}
+              
+            </div>
+          </div>
+      {%- endcase -%}
+    {%- endcase -%}
+  {%- endfor -%}
+    
+    {%- assign hasAddress = false -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'address' -%}
+        {%- assign hasAddress = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {%- if hasAddress -%}
+      <div class="contact__row">
+        <h3 class='contact-block__title'><span>{{- "templates.contact.form.address" | t -}}</span> {%- render 'icons' icon: "url" -%}</h3>
+        <ul class='contact-list'>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'address' -%}
+              <li class='contact-list__item'>
+                <a class='contact-list__link' target="_blank" href="{{- block.settings.url -}}">{{- block.settings.street -}}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Contact Information",
+    "settings": [
+      {
+        "type": "header",
+		"content": "Основные настройки",
+		"info": "powered by TRM"
+      }
+    ],
+    "blocks": [
+      {
+		"type": "@app"
+      },
+      {
+		"name": "Адрес",
+		"type": "address",
+		"limit": 3,
+		"settings": [
+          {
+			"type": "header",
+			"content": "Основные настройки"
+          },
+          {
+            "type": "text",
+            "label": "Адрес",
+			"id": "street"
+          },
+          {
+			"type": "url",
+			"label": "Ссылка",
+			"id": "url"
+          }
+		]
+      },
+      {
+        "name": "Электронная почта",
+		"type": "email",
+        "limit": 1,
+		"settings": [
+          {
+            "type": "header",
+            "content": "Основные настройки"
+          },
+          {
+			"type": "text",
+			"label": "Электронная почта",
+			"id": "email",
+			"default": "info@newbornk.com"
+          }
+		]
+      },
+      {
+        "name": "Телефон",
+		"type": "phone",
+        "limit": 1,
+		"settings": [
+          {
+            "type": "header",
+            "content": "Основные настройки"
+          },
+          {
+			"type": "text",
+			"label": "Номер телефона",
+			"id": "phone",
+			"default": "+380 (63) 706 43 41"
+          }
+		]
+      },
+      {
+		"name": "Режим работы",
+		"type": "working_hours",
+        "limit": 1,
+		"settings": [
+          {
+			"type": "header",
+			"content": "Освноные настройки"
+          },
+          {
+            "type": "select",
+            "id": "view",
+            "label": "Внешний вид",
+            "options": [
+              {
+                "value": "full",
+                "label": "Полный"
+              },
+              {
+                "value": "short",
+                "label": "Сокращенный"
+              }
+            ],
+            "default": "short"
+          },
+          {
+			"type": "header",
+			"content": "Данные"
+          },
+          {
+			"type": "text",
+			"id": "short_weekdays",
+			"label": "Рабочие дни",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "short_weekend",
+			"label": "Выходные дни",
+			"default": "11:00 - 19:00"
+          },
+          {
+			"type": "text",
+			"id": "monday",
+			"label": "Понедельник",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "tuesday",
+			"label": "Вторник",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "wednesday",
+			"label": "Среда",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "thursday",
+			"label": "Четверг",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "friday",
+			"label": "Пятница",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "saturday",
+			"label": "Суббота",
+			"default": "11:00 - 20:00"
+          },
+          {
+			"type": "text",
+			"id": "sunday",
+			"label": "Воскресенье",
+			"default": "11:00 - 19:00"
+          }
+		]
+      }
+    ]
+  }
+{% endschema %}

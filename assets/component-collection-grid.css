@@ -1,0 +1,18 @@
+.section-with-sidebar {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    max-width: 144rem;
+    margin: auto;
+}
+.filters-sidebar {
+    width: 20%;
+}
+.collection-products {
+    width: 80%;
+}
+.collection-sorting {
+    width: 100%;
+}

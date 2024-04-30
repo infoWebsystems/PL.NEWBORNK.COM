@@ -1,0 +1,84 @@
+.contact-block {
+  padding: 48px 24px;
+  background-color: #CCF951;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 48px 0;
+
+  margin: 110px 0;
+}
+
+.contact-block .contact__row h3 {
+  margin: 0 0 8px 0;
+
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #000000;
+
+  line-height: 17px;
+}
+
+.contact-block .contact__row .contact-block__text {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #000000;
+
+  margin: 0;
+
+  line-height: 18px;
+
+  text-decoration: none;
+}
+
+.contact-block .contact__row .contact-grid {
+  display: grid;
+}
+
+.contact-block .contact__row .contact-grid.contact--work-time {
+  gap: 0 8px;
+  grid-template-columns: minmax(min-content, max-content) 1fr;
+}
+
+.contact-block__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.contact-block__title > span {
+  margin-right: 8px;
+}
+
+.contact-block .contact__row .contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.contact-block .contact__row .contact-list .contact-list__item {
+  line-height: 18px;
+}
+
+.contact-block .contact__row .contact-list a {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 576px) {
+  .contact-block {
+    margin: 55px 0;
+  }
+}

@@ -1,0 +1,105 @@
+.product__media-list {
+  gap: 30px 0;
+}
+
+.product__text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.product__title {
+  font-size: 14px;
+  line-height: 120%;
+  color: #000000;
+  padding-top: 10px;
+}
+
+.product-form__buttons .product-form__submit.button--primary {
+  background-color: #CCF951;
+  color: #000;
+  border-color:#CCF951;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.product__info-container--sticky p,
+.product__info-container--sticky span,
+.product__info-container--sticky div{
+  letter-spacing: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .grid--2-col-tablet .grid__item {
+    width: 100%;
+  }
+  .product-form__input--dropdown {
+    margin-bottom: 1.6rem;
+    margin-right: 0;
+    max-width: 100%;
+  }
+  .product-form__input .select {
+    max-width: 100%;
+  }
+  .grid__item {
+    padding-bottom: 0rem;
+    padding-left: 1.6rem;
+  }
+  .product__info-wrapper {
+    margin-top: 30px;
+  }
+  
+  .product__info-container--sticky {
+  	top: -50%;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product-media-modal__content img {
+  	object-fit: cover;
+    width: 100%;
+  }
+}
+
+product-recommendations .price dd {
+    margin: 0 0;
+}
+product-recommendations .price {
+    font-size: 1.3rem;
+}
+
+@media screen and (min-width: 990px) {
+  .product:not(.product--no-media) .product__media-wrapper {
+      max-width: 50%;
+      width: calc(50% - 1rem / 2);
+  }
+}
+@media screen and (max-width: 990px) {
+  .product-form__input,
+  .product-form__input .select{
+      max-width: 100%;
+  }
+}
+
+.product-form__buttons .product-form__submit.button--primary.loading {
+  background-color: var(--color-base-accent-1);
+}
+
+.product__text > .product__link {
+  color: inherit;
+  text-decoration: none;
+}
+variant-radios{
+  transition: .2s all;
+}
+.loading-state{
+  transition: .2s all;
+  opacity: .7;
+  pointer-events: none;
+  cursor: wait;
+}

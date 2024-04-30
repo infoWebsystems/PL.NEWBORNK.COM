@@ -1,0 +1,50 @@
+.page-title {
+  margin-top: 0;
+}
+
+.main-page-title {
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .main-page-title {
+    margin-bottom: 4rem;
+  }
+}
+
+.page-placeholder-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+          justify-content: center;
+}
+.page-placeholder {
+  width: 52.5rem;
+  height: 52.5rem;
+}
+.template-page .rte p,
+.template-page .rte ul,
+.template-page .rte li{
+  color: #000000;
+  font-family: 'Formular';
+  font-size: 1.4rem;
+  line-height: 1.1;
+  margin-top: 0;
+  margin-bottom: 2.0rem;
+}
+.template-page .rte li{
+  margin-bottom: 0;
+}
+.template-page .spaced-section {
+  margin-top: 32px;
+}
+
+@media screen and (max-width: 440px) {
+  .template-page .rte p,
+  .template-page .rte ul,
+  .template-page .rte li{
+    font-size: 1.3rem;
+  }
+}

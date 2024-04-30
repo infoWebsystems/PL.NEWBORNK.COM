@@ -1,0 +1,208 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.form-input, .form-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-select, .form-select option {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+       appearance: textfield;
+}
+
+.form__input::-webkit-input-placeholder {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.form__input::-moz-placeholder {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.form__input:-ms-input-placeholder {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.form__input::-ms-input-placeholder {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.form__input::placeholder, .form__input {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.form__input {
+  padding: 10px 15px;
+  border: 1px solid #000000;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.contact__fields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 14px 0;
+}
+
+.form__select option {
+  padding: 10px 15px;
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-input--required {
+  position: relative;
+}
+
+.contact {
+  margin-top: 110px;
+}
+
+.form-input--required::after {
+  content: "*";
+  position: absolute;
+  top: 0;
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 120%;
+
+  color: #000000;
+  right: -20px;
+}
+
+.contact-header .contact-header__title {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0 0 8px 0;
+}
+
+.contact-header .contact-header__content {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.contact .contact__button {
+  margin-top: 24px;
+}
+
+.contact .contact__button .button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  padding: 12px;
+
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+
+  color: #000000;
+
+  width: 100%;
+  background: #CCF951;
+  border-radius: 4px;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+
+  -webkit-transition: background-color var(--duration-default) ease-in-out;
+
+  -o-transition: background-color var(--duration-default) ease-in-out;
+
+  transition: background-color var(--duration-default) ease-in-out;
+
+}
+
+.contact .contact__button .button:hover {
+  background-color: #bbff00;
+}
+
+.contact {
+  max-width: 600px;
+}
+
+@media screen and (max-width: 576px) {
+  .contact {
+  	margin-top: 55px;
+  }
+}

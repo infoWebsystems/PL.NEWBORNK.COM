@@ -1,0 +1,382 @@
+<nav class="header__inline-menu header__inline-menu--mobile" {%- if section.settings.menu_position == 'center' -%} style="margin: auto;"  {%- endif -%}>
+  <div class="facets-box__icon--close">
+    {%- render 'icon-close' -%}
+  </div>
+    <ul class="list-menu list-menu--inline sidebar-menu" role="list">
+      {% assign sale_collection = collections['new-arrivals'] %}
+  {% assign cur_tags = sale_collection.all_tags %}
+  {% assign col_tag = 'Чоловікам+Чоловіче,Жінкам+Жіноче,Аксесуари+Аксесуари,Взуття+Взуття,Lifestyle+Lifestyle' | split: ',' %}
+  {% assign found_tag = false %}
+    <li>
+      <details-disclosure>
+        <details>
+          <summary class="header__menu-item list-menu__item link focus-inset">
+            <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>
+              Нове
+            </span>
+            {% comment %} {% render 'icon-caret' %} {% endcomment %}
+          </summary>
+    <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
+      {% for ct in col_tag %}
+        {% assign ct_tag = ct | split: '+' %}
+        {% assign ct_tag_collection = ct_tag | first %}
+        {% assign ct_tag_tag = ct_tag | last %}
+        {% assign ct_tag_tag_downcase = ct_tag_tag | downcase %}
+        {% if cur_tags contains ct_tag_tag or cur_tags contains ct_tag_tag_downcase %}
+          {% else %}
+            {% continue %}
+        {% endif %}
+        {%- unless ct_tag_collection contains cur_tags -%}
+          <li>     
+            <details class="list-menu__sale">
+              <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large ">
+                {{ ct_tag_collection | escape }}
+                {% render 'icon-caret' %}
+              </summary>
+                <ul
+                  class="header__submenu list-menu motion-reduce header-submenu__third--level">
+                  {%- for link in linklists.sidebar-menu.links -%}
+                    {% if link.title == ct_tag_collection %}
+                      {% for sub_link in link.links -%}
+                        {% assign nav_tag = sub_link.title %}
+                        {% assign nav_tag_downcase = sub_link.title | downcase %}
+                        {% if ct_tag_tag_downcase == 'жіноче' or ct_tag_tag_downcase == 'чоловіче' %}
+                          {% assign nav_url = sale_collection.url | append: '/' | append: ct_tag_tag_downcase | append: '+' | append: nav_tag_downcase %}
+                        {% else %}
+                          {% assign nav_url = sale_collection.url | append: '/' | append: nav_tag_downcase %}
+                        {% endif %}
+                        {% paginate sale_collection.products by 5000 %}
+                          {% assign lifestile_tag = 'Для домашніх улюбленців+Для собак,Скейтбордінг+Дошка для скейтбордингу,Для вечірок+Вечірка,Папір для самокруток+Папір для самокруток' | split: ',' %}
+                          {% for lt in lifestile_tag %}
+                            {% assign lt_tag = lt | split: '+' %}
+                            {% assign lt_tag_collection = lt_tag | first %}
+                            {% assign lt_tag_tag = lt_tag | last %}
+                            {% assign lt_tag_tag_downcase = lt_tag_tag | downcase %}
+
+                            {% if forloop.index > 1 and sub_link.title != 'Для домашніх улюбленців' and sub_link.title != 'Скейтбордінг' and sub_link.title != 'Для вечірок' %}
+                              {% break %}
+                            {% else %}
+                              {% for p in sale_collection.products %}
+                                {% if p.tags contains nav_tag and p.tags contains ct_tag_tag %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag_downcase %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag and p.tags contains ct_tag_tag_downcase %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains lt_tag_tag and nav_tag contains lt_tag_collection %}
+                                  {% assign lt_tag_tag_url = lt_tag_tag | split: ' ' %}
+                                  {% assign lt_tag_tag_url_j = lt_tag_tag_url | join: '-' %}
+                                  {% assign navl_url = sale_collection.url | append: '/' | append: lt_tag_tag_url_j %}
+                                  <li>
+                                    <a href="{{ navl_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                          {%- endfor -%}
+                        {% endpaginate %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+          </li>
+        {%- endunless -%}
+      {% endfor %}
+      <!-- {% if found_tag %}
+        <li>
+          {% comment %} Бренди {% endcomment %}
+          <details class="list-menu__sale">
+            <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large ">
+              Бренди
+              {% render 'icon-caret' %}
+            </summary>
+              <ul class="header__submenu list-menu motion-reduce header-submenu__third--level">
+                {% assign ua_brands = '' %}
+                {%- for link in linklists.sidebar-menu.links -%}
+                  {%- unless link.title == 'Бренди' -%}
+                    {%- continue -%}
+                  {%- endunless -%}
+                  {% for sub_link in link.links -%}
+                    {% comment %} {{ sub_link.title }} {% endcomment %}
+                    {%- if sub_link.title contains ' 🇺🇦' -%}
+                      {%- assign cur_brand = sub_link.title | replace: ' 🇺🇦', '' -%}
+                      {%- assign ua_brands = ua_brands | append: cur_brand | append: '~' -%}
+                    {%- endif -%}
+                  {%- endfor %}
+                {%- endfor %}
+                {% assign ua_brands_array = ua_brands | split: '~' | sort %} 
+                {% assign sale_brands = '' %}
+                {% paginate sale_collection.products by 5000 %}
+                  {% for p in sale_collection.products %}
+                    {% assign cur_brand = p.vendor %}
+                    {% unless sale_brands contains cur_brand %}
+                      {% assign sale_brands = sale_brands | append: cur_brand | append: '~' %}
+                    {% endunless %}
+                  {%- endfor %}
+                {% endpaginate %}
+                {% assign sale_brands_array = sale_brands | split: '~' | sort %}
+                {% for br in sale_brands_array %}
+                  <li>
+                    <a href="{{ sale_collection.url | append: '?filter.p.vendor=' | append: br }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                      {%- if ua_brands_array contains br -%}
+                        {{ br | append: ' 🇺🇦' | escape }}
+                      {%- else -%}
+                        {{ br | escape }}
+                      {%- endif -%}
+                    </a>
+                  </li>
+                {%- endfor %}
+              </ul>
+            </details>
+        </li>
+      {% endif %} -->
+    </ul>
+        </details>
+      </details-disclosure>
+    </li>
+      {%- for link in section.settings.menu_sidebar.links -%}
+        {% if link.title != 'Бренди' %}
+        <li>
+          {%- if link.links != blank -%}
+            <details-disclosure>
+              <details>
+                <summary class="header__menu-item list-menu__item link focus-inset">
+                  <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                 {% comment %} {% render 'icon-caret' %} {% endcomment %}
+                </summary>
+                <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
+                  {%- for childlink in link.links -%}
+                    <li>
+                      {%- if childlink.links == blank -%}
+                        <a href="{{ childlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                          {{ childlink.title | escape }}
+                        </a>
+                      {%- else -%}
+                        <details>
+                          <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                            {{ childlink.title | escape }}
+                            {% render 'icon-caret' %}
+                          </summary>
+                          <ul class="header__submenu list-menu motion-reduce">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            </details-disclosure>
+          {%- else -%}
+            <a href="{{ link.url }}" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+              <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+            </a>
+          {%- endif -%}
+        </li>
+        {% endif %}
+      {%- endfor -%}
+  {% assign sale_collection = collections['sale'] %}
+  {% assign cur_tags = sale_collection.all_tags %}
+  {% assign col_tag = 'Чоловікам+Чоловіче,Жінкам+Жіноче,Аксесуари+Аксесуари,Взуття+Взуття,Lifestyle+Lifestyle' | split: ',' %}
+  {% assign found_tag = false %}
+    <li>
+      <details-disclosure>
+        <details>
+          <summary class="header__menu-item list-menu__item link focus-inset">
+            <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>
+              SALE
+            </span>
+            {% comment %} {% render 'icon-caret' %} {% endcomment %}
+          </summary>
+    <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
+      {% for ct in col_tag %}
+        {% assign ct_tag = ct | split: '+' %}
+        {% assign ct_tag_collection = ct_tag | first %}
+        {% assign ct_tag_tag = ct_tag | last %}
+        {% assign ct_tag_tag_downcase = ct_tag_tag | downcase %}
+        {% if cur_tags contains ct_tag_tag or cur_tags contains ct_tag_tag_downcase %}
+          {% else %}
+            {% continue %}
+        {% endif %}
+        {%- unless ct_tag_collection contains cur_tags -%}
+          <li>
+                 <details class="list-menu__sale">
+                        <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large ">
+                          {{ ct_tag_collection | escape }}
+                          {% render 'icon-caret' %}
+                        </summary>
+                <ul
+                  class="header__submenu list-menu motion-reduce header-submenu__third--level">
+                  {%- for link in linklists.sidebar-menu.links -%}
+                    {% if link.title == ct_tag_collection %}
+                      {% for sub_link in link.links -%}
+                        {% assign nav_tag = sub_link.title %}
+                        {% assign nav_tag_downcase = sub_link.title | downcase %}
+                        {% if ct_tag_tag_downcase == 'жіноче' or ct_tag_tag_downcase == 'чоловіче' %}
+                          {% assign nav_url = sale_collection.url | append: '/' | append: ct_tag_tag_downcase | append: '+' | append: nav_tag_downcase %}
+                        {% else %}
+                          {% assign nav_url = sale_collection.url | append: '/' | append: nav_tag_downcase %}
+                        {% endif %}
+                        {% paginate sale_collection.products by 5000 %}
+                          {% assign lifestile_tag = 'Для домашніх улюбленців+Для собак,Скейтбордінг+Дошка для скейтбордингу,Для вечірок+Вечірка,Папір для самокруток+Папір для самокруток' | split: ',' %}
+                          {% for lt in lifestile_tag %}
+                            {% assign lt_tag = lt | split: '+' %}
+                            {% assign lt_tag_collection = lt_tag | first %}
+                            {% assign lt_tag_tag = lt_tag | last %}
+                            {% assign lt_tag_tag_downcase = lt_tag_tag | downcase %}
+                            {% if forloop.index > 1 and sub_link.title != 'Для домашніх улюбленців' and sub_link.title != 'Скейтбордінг' and sub_link.title != 'Для вечірок' %}
+                              {% break %}
+                            {% else %}
+                              {% for p in sale_collection.products %}
+                                {% if p.tags contains nav_tag and p.tags contains ct_tag_tag %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag_downcase %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag and p.tags contains ct_tag_tag_downcase %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains nav_tag_downcase and p.tags contains ct_tag_tag %}
+                                  <li>
+                                    <a href="{{ nav_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% elsif p.tags contains lt_tag_tag and nav_tag contains lt_tag_collection %}
+                                  {% assign lt_tag_tag_url = lt_tag_tag | split: ' ' %}
+                                  {% assign lt_tag_tag_url_j = lt_tag_tag_url | join: '-' %}
+                                  {% assign navl_url = sale_collection.url | append: '/' | append: lt_tag_tag_url_j %}
+                                  <li>
+                                    <a href="{{ navl_url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                      {{ sub_link.title | escape }}
+                                    </a>
+                                  </li>
+                                  {% assign found_tag = true %}
+                                  {% break %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                          {%- endfor -%}
+                        {% endpaginate %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+          </li>
+        {%- endunless -%}
+      {% endfor %}
+      <!-- {% if found_tag %}
+        <li>
+          {% comment %} Бренди {% endcomment %}
+          <details class="list-menu__sale">
+            <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large ">
+              Бренди
+              {% render 'icon-caret' %}
+            </summary>
+              <ul class="header__submenu list-menu motion-reduce header-submenu__third--level">
+                {% assign ua_brands = '' %}
+                {%- for link in linklists.sidebar-menu.links -%}
+                  {%- unless link.title == 'Бренди' -%}
+                    {%- continue -%}
+                  {%- endunless -%}
+                  {% for sub_link in link.links -%}
+                    {% comment %} {{ sub_link.title }} {% endcomment %}
+                    {%- if sub_link.title contains ' 🇺🇦' -%}
+                      {%- assign cur_brand = sub_link.title | replace: ' 🇺🇦', '' -%}
+                      {%- assign ua_brands = ua_brands | append: cur_brand | append: '~' -%}
+                    {%- endif -%}
+                  {%- endfor %}
+                {%- endfor %}
+                {% assign ua_brands_array = ua_brands | split: '~' | sort %} 
+                {% assign sale_brands = '' %}
+                {% paginate sale_collection.products by 5000 %}
+                  {% for p in sale_collection.products %}
+                    {% assign cur_brand = p.vendor %}
+                    {% unless sale_brands contains cur_brand %}
+                      {% assign sale_brands = sale_brands | append: cur_brand | append: '~' %}
+                    {% endunless %}
+                  {%- endfor %}
+                {% endpaginate %}
+                {% assign sale_brands_array = sale_brands | split: '~' | sort %}
+                {% for br in sale_brands_array %}
+                  <li>
+                    <a href="{{ sale_collection.url | append: '?filter.p.vendor=' | append: br }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                      {%- if ua_brands_array contains br -%}
+                        {{ br | append: ' 🇺🇦' | escape }}
+                      {%- else -%}
+                        {{ br | escape }}
+                      {%- endif -%}
+                    </a>
+                  </li>
+                {%- endfor %}
+              </ul>
+            </details>
+        </li>
+      {% endif %} -->
+    </ul>
+        </details>
+      </details-disclosure>
+    </li>
+    <collection-filters-form class="facets facets-mobile">
+      <li class="facets-box">
+        {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, collapse_on_larger_devices: false %}
+      </li>
+    </collection-filters-form>
+    </ul>
+  </nav>

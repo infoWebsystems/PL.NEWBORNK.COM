@@ -1,0 +1,21 @@
+.banner.banner-v2 {
+  min-height: auto;	
+}
+
+.banner.banner-v2 .banner__media,
+.banner.banner-v2 .banner__media > img {
+  position: relative;
+}
+
+.banner.banner-v2 .banner__media.media {
+  background-color: #fff;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner.banner-v2 .banner__media > img {
+  max-width: 310px;
+}

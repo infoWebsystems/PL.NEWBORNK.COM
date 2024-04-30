@@ -1,0 +1,180 @@
+<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-collection-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+  media="print" onload="this.media='all'"
+/>
+
+<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-collection-slider.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- assign products = section.settings.collection.products -%}
+
+<div class="slider page-width page-width-desktop page-width-full">  
+  
+  <div class="swiper-container swiper-container-collection section-{{section.id}}" >
+    <ul class="swiper-wrapper" role="list" >
+      {%- for product in products -%}
+        <li class="swiper-slide">
+          {% render 'product-card',
+            product_card_product: product,
+            media_size: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+            add_image_padding: section.settings.add_image_padding,
+            show_vendor: section.settings.show_vendor,
+            show_info: section.settings.show_info
+          %}
+        </li>
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <li class="swiper-slide">
+            {% render 'product-card-placeholder' %}
+          </li>
+        {%- endfor -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+<style>
+  
+  .swiper-container-collection {
+    overflow: hidden;
+  }
+  
+  ul.swiper-wrapper {
+  	list-style: none;
+    padding: 0;
+    margin: 0px -40px;
+  }
+  
+  .slider {
+  	margin: 0;
+    padding: 0;
+    max-width: unset;
+  }
+  
+</style>
+
+  <script src="{{ 'swiper.js' | asset_url }}"></script>
+
+  <script type="text/javascript" defer>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.swiper-container-collection.section-{{section.id}}', {
+            slidesPerView: 7,
+            speed: 1200,
+            centeredSlides: false,
+            slideToClickedSlide: false,
+            cssMode: false,
+            freeMode: true,
+            loop: true,
+            autoplay: {
+              delay: 2000
+            },
+            slidesOffsetAfter: 0,
+            mousewheel: {
+                releaseOnEdges: true,
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                },
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                },
+                640: {
+                    slidesPerView: 7,
+                    spaceBetween: 15
+                }
+            }
+
+        });
+    });
+    
+  </script>
+
+
+{% schema %}
+{
+  "name":"Slider",
+  "settings":[
+    {
+      "type":"collection",
+      "id":"collection",
+      "label":"t:sections.featured-collection-slider.settings.collection.label"
+    },
+    {
+      "type":"select",
+      "id":"image_ratio",
+      "options":[
+        {
+          "value":"adapt",
+          "label":"t:sections.featured-collection-slider.settings.image_ratio.options__1.label"
+        },
+        {
+          "value":"portrait",
+          "label":"t:sections.featured-collection-slider.settings.image_ratio.options__2.label"
+        },
+        {
+          "value":"square",
+          "label":"t:sections.featured-collection-slider.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default":"adapt",
+      "label":"t:sections.featured-collection-slider.settings.image_ratio.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_secondary_image",
+      "default":false,
+      "label":"t:sections.featured-collection-slider.settings.show_secondary_image.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"add_image_padding",
+      "default":false,
+      "label":"t:sections.featured-collection-slider.settings.add_image_padding.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_vendor",
+      "default":false,
+      "label":"t:sections.featured-collection-slider.settings.show_vendor.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_arrow",
+      "default":false,
+      "label":"Show Arrow After Link"
+    },
+    {
+      "type":"checkbox",
+      "id":"brand_collection",
+      "default":false,
+      "label":"Show product brand collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_info",
+      "default": true,
+      "label":"Show product information"
+	}
+  ],
+  "presets":[
+    {
+      "name":"Slider by TRM"
+    }
+  ]
+}
+{% endschema %}

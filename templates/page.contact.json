@@ -1,0 +1,124 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "blocks": {
+        "50cc8939-78bc-470d-9de2-2bb4c3fdf2c4": {
+          "type": "request",
+          "settings": {
+            "required": true,
+            "options": "Повернення, Статус покупки"
+          }
+        },
+        "0848c785-83d8-43d2-abea-ab4945801fdf": {
+          "type": "name",
+          "settings": {
+            "required": true
+          }
+        },
+        "5d53a39d-5b05-4d25-b420-cd6942634159": {
+          "type": "email",
+          "settings": {
+            "required": true
+          }
+        },
+        "4625a754-5e73-46d3-ac66-f7be0d9e5fb0": {
+          "type": "phone",
+          "settings": {
+            "required": true
+          }
+        },
+        "18dda8e4-0a7f-4e90-80f7-a5e973ef0c04": {
+          "type": "body",
+          "settings": {
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "50cc8939-78bc-470d-9de2-2bb4c3fdf2c4",
+        "0848c785-83d8-43d2-abea-ab4945801fdf",
+        "5d53a39d-5b05-4d25-b420-cd6942634159",
+        "4625a754-5e73-46d3-ac66-f7be0d9e5fb0",
+        "18dda8e4-0a7f-4e90-80f7-a5e973ef0c04"
+      ],
+      "settings": {
+        "heading": "Contact form"
+      }
+    },
+    "info": {
+      "type": "contact-info",
+      "blocks": {
+        "12eef3a6-d223-4ef0-83b5-ba82b6c6e215": {
+          "type": "email",
+          "settings": {
+            "email": "info@newbornk.com"
+          }
+        },
+        "c8ea31b6-bc74-4f49-81ca-abef5dc6eaf9": {
+          "type": "phone",
+          "settings": {
+            "phone": "+380 (98) 840 23 89"
+          }
+        },
+        "83665029-ada5-4004-82e9-11e95ca91c7c": {
+          "type": "working_hours",
+          "settings": {
+            "view": "short",
+            "short_weekdays": "11:00 - 20:00",
+            "short_weekend": "11:00 - 19:00",
+            "monday": "11:00 - 20:00",
+            "tuesday": "11:00 - 20:00",
+            "wednesday": "11:00 - 20:00",
+            "thursday": "11:00 - 20:00",
+            "friday": "11:00 - 20:00",
+            "saturday": "11:00 - 20:00",
+            "sunday": "11:00 - 19:00"
+          }
+        },
+        "92db4d45-7fa4-4055-b13d-e755116eb814": {
+          "type": "address",
+          "settings": {
+            "street": "ул. Леонида Первомайского 9,офис 20",
+            "url": "https:\/\/goo.gl\/maps\/6TZzxfrmXhEvB8yV7"
+          }
+        },
+        "1fd21b55-8335-430b-8128-5a3e7c7fa39d": {
+          "type": "address",
+          "settings": {
+            "street": "ФОП Рудаков Дмитро Олексійович",
+            "url": ""
+          }
+        },
+        "709b3b9b-8ed9-4c42-b6e1-95dc652a3f2f": {
+          "type": "address",
+          "settings": {
+            "street": "ІПН 3266710197",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "12eef3a6-d223-4ef0-83b5-ba82b6c6e215",
+        "c8ea31b6-bc74-4f49-81ca-abef5dc6eaf9",
+        "83665029-ada5-4004-82e9-11e95ca91c7c",
+        "92db4d45-7fa4-4055-b13d-e755116eb814",
+        "1fd21b55-8335-430b-8128-5a3e7c7fa39d",
+        "709b3b9b-8ed9-4c42-b6e1-95dc652a3f2f"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form",
+    "info"
+  ]
+}
