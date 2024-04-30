@@ -103,6 +103,7 @@
     line-height: 120%; /* 16.8px */
     text-transform: uppercase;
     text-decoration: none;
+    font-family: var(--font-heading-family);
 }
 .stub-logo{
     width: fit-content;
@@ -212,6 +213,8 @@
     }
     .links-buttons-wrap a{
         color: #FFFFFF;
+        font-family: var(--font-heading-family);
+
     }
 }
 @media screen and (max-width: 439px){
