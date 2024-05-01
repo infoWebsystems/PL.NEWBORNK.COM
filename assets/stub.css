@@ -44,15 +44,16 @@
 .needsclick.kl-private-reset-css-Xuajs1 h3{
     color: #000;
     text-align: center;
-    font-family: Formular !important;
     font-size: 22px !important;
     font-style: normal;
     font-weight: 400;
     line-height:  23.32px;
     text-transform: uppercase;
+    font-family: var(--font-heading-family)  !important;
+
 }
 .needsclick.kl-private-reset-css-Xuajs1 p{
-    font-family: Formular !important;
+    font-family: var(--font-heading-family)  !important;
     font-size: 16px !important;
     font-style: normal;
     font-weight: 400;
@@ -64,12 +65,13 @@
     border-radius: 5px !important;
     padding: .8rem 1.2rem;
     color: #000 !important;
+    height: 32px !important;
 }
 .stub-wrapper .klaviyo-form{
     border-radius: 5px !important;
 }
 .form-wrapper input,.form-wrapper input:hover {
-    font-family: Formular !important;
+    font-family: var(--font-heading-family)  !important;
     font-size: 13.032px;
     font-style: normal;
     font-weight: 400;
@@ -78,6 +80,9 @@
 }
 .needsclick.go4057053373.kl-private-reset-css-Xuajs1{
     height: 30px !important;
+}
+.go2029694599.go2029694599.go2029694599:hover {
+    border-color: black !important;
 }
 .links-block{
     width: 100%;
@@ -120,7 +125,7 @@
 .inst-block p{
     color: #000;
     text-align: center;
-    font-family: Formular;
+    font-family: var(--font-heading-family)  !important;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -131,7 +136,7 @@
 .inst-block .notice{
     color: #000;
     text-align: center;
-    font-family: Formular;
+    font-family: var(--font-heading-family)  !important;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -151,7 +156,7 @@
     text-decoration: none;
     color: #000;
     text-align: center;
-    font-family: Formular;
+    font-family: var(--font-heading-family)  !important;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -217,6 +222,9 @@
 
     }
 }
+.needsclick.kl-private-reset-css-Xuajs1 .needsclick.go4017650657.kl-private-reset-css-Xuajs1{
+    height: 38px !important;
+}
 @media screen and (max-width: 439px){
     .stub-video-wrapper{
         height: 202px;
@@ -224,4 +232,11 @@
     .stub-logo{
         top: 18px;
     }
+}
+.go1687481470.go1687481470.go1687481470:focus {
+    border: 0px solid rgba(20, 19, 19, 0.0) !important;
+    box-shadow: 0 0 0px rgba(17, 17, 17, 0) !important;
+}
+.needsclick  input{
+    box-shadow: none !important;
 }
