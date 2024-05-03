@@ -6,8 +6,6 @@
         "1630994380b1b22eeb-0": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/image_2024-02-13_12-59-27.png",
-            "image_phone": "shopify:\/\/shop_images\/Mask_group.jpg",
             "banner_link": "shopify:\/\/collections\/sale",
             "language": "UK"
           }
@@ -15,8 +13,6 @@
         "22a50905-f3ab-4163-8763-bbc28328aa48": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_566906.jpg",
-            "image_phone": "shopify:\/\/shop_images\/Frame_566907.jpg",
             "banner_link": "shopify:\/\/collections\/carhartt-wip",
             "language": "UK"
           }
@@ -24,8 +20,6 @@
         "1630994380b1b22eeb-2": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_566877_094da0e8-40b1-49d3-9eea-69054d802506.jpg",
-            "image_phone": "shopify:\/\/shop_images\/Frame_566878_caf6d4bf-6acc-4563-bc17-5ab6941e2bb1.jpg",
             "banner_link": "shopify:\/\/collections\/new-arrivals",
             "language": "UK"
           }
@@ -33,8 +27,6 @@
         "ce6d2dc3-91a2-4167-94e4-935de9a1b462": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_566884.jpg",
-            "image_phone": "shopify:\/\/shop_images\/Ban_jan22_sale_mob_41de1e5e-c6a9-45fb-acec-48691a46ff42.jpg",
             "banner_link": "shopify:\/\/collections\/pleasures",
             "language": "UK"
           }
@@ -42,8 +34,6 @@
         "1630994380b1b22eeb-1": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_566879.jpg",
-            "image_phone": "shopify:\/\/shop_images\/Ban_jan22_sale_mob_77239370-eb3a-4d53-883c-abb9a10d8779.jpg",
             "banner_link": "shopify:\/\/collections\/gramicci",
             "language": "UK"
           }
@@ -52,8 +42,6 @@
           "type": "slide",
           "disabled": true,
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_202_1f133780-7d8d-4690-a084-5621ac5e8b84.jpg",
-            "image_phone": "shopify:\/\/shop_images\/Frame_376_e7cf6ee2-bb0c-4223-9736-ffa988ae0c46.jpg",
             "banner_link": "shopify:\/\/collections\/gift_ideas",
             "language": "UK"
           }
@@ -78,7 +66,6 @@
       "type": "image-banner",
       "disabled": true,
       "settings": {
-        "image": "shopify:\/\/shop_images\/banner.png",
         "desktop_text_box_position": "flex-end",
         "color_scheme": "background-1",
         "stack_images_on_mobile": true,
@@ -223,7 +210,7 @@
       "settings": {
         "btn-text": "Button text",
         "logo_link": "",
-        "instagram_link": "",
+        "instagram_link": "https:\/\/www.instagram.com\/newbornk.warsaw?igsh=MTN4NWtmajE3MGV0bA==",
         "facebook_link": "",
         "telegram_link": ""
       }
