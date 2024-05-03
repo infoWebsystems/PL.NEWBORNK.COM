@@ -9,7 +9,7 @@
     <div class="stub-content">
         <div class="stub-logo">
             {% if  section.settings.logo_link != blank %}
-            <a href="#">
+            <a href="{{ section.settings.logo_link }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="32" viewBox="0 0 246 32" fill="none">
                     <rect width="246" height="32" rx="3.91615" fill="#CCF951"/>
                     <path d="M27.3262 25.6044H33.7517V15.2668H34.3371L41.1389 25.6044H48.5401V6.47653H42.1146V16.8141H41.5292L34.8807 6.47653H27.3262V25.6044Z" fill="black"/>
@@ -39,7 +39,7 @@
 
         <div class="klaviyo-form-Y8ykii form-wrapper"></div>
         <div class="inst-block">
-           <a class="inst-link" href="#">Instagram NEWBORN k Warszawa</a>
+           <a class="inst-link" href="{{ section.settings.instagram_link }}">Instagram NEWBORN k Warszawa</a>
             <p class="notice">Jeśli chcesz zrezygnować z otrzymywania powiadomień o dacie otwarcia concept store'u NEWBORN K, prosimy o poinformowanie nas drogą mailową na adres info@NEWBORNK.COM</p>
         </div>
     </div>
