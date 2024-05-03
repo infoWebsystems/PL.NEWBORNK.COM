@@ -241,6 +241,12 @@
         padding: 0;
         margin: 0;
     }
+    .stub-video-wrapper{
+        min-height: auto;
+    }
+    .stub-video-wrapper .hg-video{
+        min-height: auto;
+    }
 }
 .needsclick.kl-private-reset-css-Xuajs1 .needsclick.go4017650657.kl-private-reset-css-Xuajs1{
     height: 38px !important;
