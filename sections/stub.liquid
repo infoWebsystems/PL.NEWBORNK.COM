@@ -46,12 +46,37 @@
 </div>
 <div class="links-block">
     <div class="links-buttons-wrap">
-        <a href="{{ section.settings.instagram_link }}">INSTRAGRAM</a>
-        <a href="{{ section.settings.facebook_link }}">facebook</a>
-        <a href="{{ section.settings.telegram_link }}">TELEGRAM</a>
+        {% if  section.settings.instagram_link != blank %}
+            <a href="{{ section.settings.instagram_link }}">INSTRAGRAM</a>
+        {% endif %}
+        {% if  section.settings.facebook_link != blank %}
+            <a href="{{ section.settings.facebook_link }}">facebook</a>
+        {% endif %}
+        {% if  section.settings.telegram_link  != blank %}
+            <a href="{{ section.settings.telegram_link }}">TELEGRAM</a>
+        {% endif %}
+
     </div>
 </div>
 </div>
+<script>
+    function checkAndAddClass() {
+       const elements = document.querySelectorAll('.kl-private-reset-css-Xuajs1');
+       elements.forEach(element => {
+           const textContent = element.textContent;
+
+           if (textContent.includes("przy ulicy Mokotowskiej 49.")) {
+                setTimeout(() => {
+                    element.classList.add('r-padd');
+                }, 1000);
+            }
+        });
+    }
+    window.onload = function() {
+        setTimeout(checkAndAddClass, 2000);
+    };
+
+</script>
 {% schema %}
 {
   "name": "stub section",

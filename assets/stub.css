@@ -107,7 +107,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%; /* 16.8px */
-    text-transform: inherit;
+    text-transform: uppercase;
     text-decoration: none;
     font-family: var(--font-heading-family);
 }
@@ -162,7 +162,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%; /* 16.8px */
-    text-transform: inherit;
+    text-transform: uppercase;
     margin: 13px 0;
 }
 .kl-private-reset-css-Xuajs1 pre{
@@ -266,12 +266,18 @@
 .needsclick  input{
     box-shadow: none !important;
 }
-/*.needsclick.kl-private-reset-css-Xuajs1:first-child{*/
-/*    padding: 10px 0 !important;*/
-/*}*/
+
 .stub-1{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100dvh;
+}
+@media screen and (max-width: 749px){
+    .r-paddv .r-padd .r-padd  .r-padd{
+        padding:  0  !important;
+    }
+    .r-padd .r-padd  .r-padd  .r-padd h3{
+        padding-top: 12px !important;
+    }
 }
