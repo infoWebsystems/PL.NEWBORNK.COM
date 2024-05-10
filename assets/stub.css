@@ -120,10 +120,13 @@
     text-decoration: underline;
 }
 .stub-wrapper .inst-block{
-    padding: 0 24px  34px 24px;
+    padding: 24px 24px  34px 24px;
 }
 .stub-wrapper .inst-block .inst-link{
     display: none;
+}
+.inst-block{
+    margin-top: -30px;
 }
 .inst-block p{
     color: #000;
@@ -289,6 +292,7 @@
     border-radius: 5px;
     width: 529px;
 }
+
 @media screen and (max-width: 749px){
     .r-paddv .r-padd .r-padd  .r-padd{
         padding:  0  !important;
