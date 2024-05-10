@@ -287,6 +287,7 @@
 .klaviyo-form-wrap{
     background: #FFFFFF;
     border-radius: 5px;
+    width: 529px;
 }
 @media screen and (max-width: 749px){
     .r-paddv .r-padd .r-padd  .r-padd{
@@ -294,5 +295,8 @@
     }
     .r-padd .r-padd  .r-padd  .r-padd h3{
         padding-top: 12px !important;
+    }
+    .klaviyo-form-wrap{
+        width: 100%;
     }
 }
