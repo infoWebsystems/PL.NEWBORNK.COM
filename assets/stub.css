@@ -71,6 +71,7 @@
 }
 .stub-wrapper .klaviyo-form{
     border-radius: 5px !important;
+    padding-bottom: 0 !important;
 }
 .form-wrapper input,.form-wrapper input:hover {
     font-family: var(--font-heading-family)  !important;
@@ -122,9 +123,9 @@
 .stub-wrapper .inst-block{
     padding: 24px 24px  34px 24px;
 }
-.stub-wrapper .inst-block .inst-link{
-    display: none;
-}
+/*.stub-wrapper .inst-block .inst-link{*/
+/*    display: none;*/
+/*}*/
 .inst-block{
     margin-top: -30px;
 }
@@ -203,6 +204,9 @@
     }
     .inst-block{
         margin-top: 12px;
+    }
+    .stub-wrapper .inst-block{
+        padding-top: 0;
     }
     form.needsclick.klaviyo-form{
         padding: 16px 16px 0 16px !important;
