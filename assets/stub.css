@@ -175,7 +175,8 @@
     margin: 13px 0;
 }
 .kl-private-reset-css-Xuajs1 pre{
-    display: none;
+    display: block;
+    margin: 0;
 }
 @media screen and (max-width: 749px){
     .stub-wrapper{
